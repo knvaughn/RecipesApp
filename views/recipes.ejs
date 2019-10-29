@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+<a href="/">Home</a>
+
+<h1>Recipes</h1>
+
+<% recipes.forEach(function(recipe){ %>
+    <div class="recipe-card">
+        <div class="recipe-title"><%= recipe.title %></div>
+        <div class="recipe-rating">Rating: <%= recipe.rating %></div>
+        <a href="/recipes/<%= recipe.title %>">View Recipe</a>
+    </div>
+<% }); %>
+
+<h2>Add Recipe</h2>
+
+<form action="/newrecipe" method="POST">
+    <input name="recipetitle" type="text" placeholder="Recipe Title">
+    <button type="submit">Submit</button>
+</form>
+
+<% include partials/footer %>
