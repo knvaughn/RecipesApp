@@ -1,28 +1,40 @@
-<% include partials/header %>
-
-<a href="/">Home</a>
-
-<h1>Recipes</h1>
-<div id="recipes">
-    <% recipes.forEach(function(recipe){ %>
-        <div class="card">
-            <div class="thumbnail">
-                <img src="<%= recipe.image %>" alt="Recipe" class="thumbnail-image">
-            </div>
-            <div class="card-content">
-                <div class="recipe-title"><%= recipe.title %></div>
-                <div class="recipe-rating">Rating: <%= recipe.rating %></div>
-                <a href="/recipes/<%= recipe.title %>">View Recipe</a>
-            </div>
+<% include partials/header-inner %>
+<header>
+    <div class="container">
+        <h1>Recipes</h1>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div id="recipes">
+            <% recipes.forEach(function(recipe){ %>
+                <div class="card">
+                    <a href="/recipes/<%= recipe.title %>">
+                        <div class="thumbnail">
+                            <img src="<%= recipe.image %>" alt="Recipe" class="thumbnail-image">
+                        </div>
+                        <div class="card-content">
+                            <div class="recipe-title"><%= recipe.title %></div>
+                            <div class="recipe-rating">
+                                <% if(recipe.rating>0){ %>
+                                    <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
+                                <% } else { %>
+                                    <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
+                                <% } %>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
         </div>
-    <% }); %>
-</div>
-
-<h2>Add Recipe</h2>
-
-<form action="/newrecipe" method="POST">
-    <input name="recipetitle" type="text" placeholder="Recipe Title">
-    <button type="submit">Submit</button>
-</form>
+        
+        <h2>Add Recipe</h2>
+        
+        <form action="/newrecipe" method="POST">
+            <input name="recipetitle" type="text" placeholder="Recipe Title">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</main>
 
 <% include partials/footer %>
