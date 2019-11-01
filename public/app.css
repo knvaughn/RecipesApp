@@ -1,3 +1,48 @@
-body {font-family: arial, sans-serif;}
-.recipe-card {padding: 15px;}
-.recipe-title {font-weight: bold; font-size: 1.1em;}
+/* General */
+body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0;}
+h1, h2 {font-family: 'Vidaloka', serif;}
+h1 {font-size: 5.5rem; margin: 30px 0;}
+.subheader-top {font-weight: normal; font-size: 1.5rem; color: #7d7d7d; display: block; font-family: 'Nunito Sans', arial, sans-serif; line-height: 1;}
+.subheader-bottom {font-weight: normal; font-size: 1.6rem; display: block; letter-spacing: 12px;}
+/* Buttons */
+.button-primary {padding: 20px; text-align: center; min-width: 250px; font-size: 1.25rem; background: #FBC02D; font-weight: 800; box-shadow: 8px 8px 0 rgba(245, 127, 23,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
+.button-primary:hover {box-shadow: none; background: #f2a600;}
+/* Navbar */
+.navbar {padding: 10px; position: fixed; top: 0; width: 100%; z-index: 900;}
+#logo {display: inline-block; width: 200px;}
+.logo-link {display: inline-block;}
+/* Header */
+.homepage-header {display: flex; align-items: center; justify-content: center; height: 100vh; position: relative;}
+.homepage-header::before {content: ''; display: block; width: 62%; padding-top: 62%; border-radius: 50%; background: #FBC02D; position: absolute; left: -400px; z-index: -1;}
+.homepage-header::after {content: ''; display: block; width: 50%; padding-top: 50%; max-width: 635px; position: absolute; left: 19%; background: url('images/mason-jar.png') no-repeat right center; background-size: contain;}
+.inner-wrapper {margin-left: 35%;}
+.header-caption {margin: 50px 0 60px; font-size: 1.3rem; width: 100%; max-width: 375px;}
+/* Recipes */
+#recipes {display: flex; flex-wrap: wrap; justify-content: space-between;}
+.card {border-radius: 20px; flex: 0 1 24%;}
+.thumbnail {border-radius: 20px; box-shadow: 0px 7px 15px rgba(0, 0, 0, .08); position: relative; width: 100%; padding-top: 100%; overflow: hidden;}
+.thumbnail-image {display: block; min-width: 100%; height: 100%; width: auto; border-radius: 20px; position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
+.card-content {padding: 15px; border-radius: 20px; box-shadow: 0px 7px 15px rgba(0, 0, 0, .08); width: 75%; margin: 0 auto; position: relative; top: -70px; background: linear-gradient(rgba(255,255,255,.9) 20%, rgba(255,255,255,.99) 60%);}
+.recipe-title {font-weight: 800; font-size: 1.1em;}
+/* Responsive */
+@media screen and (max-width: 1600px) {
+    .homepage-header::after {width: 450px; padding-top: 450px;}
+    #logo {width: 150px;}
+}
+@media screen and (max-width: 1367px) {
+    .card {flex: 0 1 49%;}
+    .navbar {background: #FBC02D; position: relative;}
+    .homepage-header::before {width: 55%; padding-top: 55%;}
+    .homepage-header::after {left: 14%;}
+}
+@media screen and (max-width: 1200px) {
+    .homepage-header {display: block;}
+    .homepage-header::before {position: absolute; top: 500px; left: 50%; transform: translateX(-50%); margin: 0 auto; width: 200px; padding-top: 200px;}
+    .homepage-header::after {position: absolute; top: 475px; left: 50%; transform: translateX(-50%); width: 223px; padding-top: 250px;}
+    .inner-wrapper {margin-left: 0;}
+    h1, .homepage-header, .header-caption {text-align: center;}
+    .header-caption {margin: 50px auto 60px;}
+}
+@media screen and (max-width: 767px) {
+    .card {flex: 0 1 100%;}
+}

@@ -3,14 +3,20 @@
 <a href="/">Home</a>
 
 <h1>Recipes</h1>
-
-<% recipes.forEach(function(recipe){ %>
-    <div class="recipe-card">
-        <div class="recipe-title"><%= recipe.title %></div>
-        <div class="recipe-rating">Rating: <%= recipe.rating %></div>
-        <a href="/recipes/<%= recipe.title %>">View Recipe</a>
-    </div>
-<% }); %>
+<div id="recipes">
+    <% recipes.forEach(function(recipe){ %>
+        <div class="card">
+            <div class="thumbnail">
+                <img src="<%= recipe.image %>" alt="Recipe" class="thumbnail-image">
+            </div>
+            <div class="card-content">
+                <div class="recipe-title"><%= recipe.title %></div>
+                <div class="recipe-rating">Rating: <%= recipe.rating %></div>
+                <a href="/recipes/<%= recipe.title %>">View Recipe</a>
+            </div>
+        </div>
+    <% }); %>
+</div>
 
 <h2>Add Recipe</h2>
 
