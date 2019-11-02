@@ -2,11 +2,11 @@
 <main>
     <section id="recipes">
         <div class="container">
-            <div class="wrap"><h1>Recipes</h1> <a href="/recipes/new" class="button-round">+</a></div>
+            <div class="wrap"><h1>Recipes</h1> <a href="/recipes/new" class="button-round" id="new-recipe-button">+</a></div>
             <div id="recipe-cards">
                 <% recipes.forEach(function(recipe){ %>
                     <div class="card">
-                        <a href="/recipes/<%= recipe.title %>">
+                        <a href="/recipes/<%= recipe._id %>">
                             <div class="thumbnail">
                                 <img src="<%= recipe.image %>" alt="Recipe" class="thumbnail-image">
                             </div>

@@ -9,14 +9,15 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 .subheader-bottom {font-weight: normal; font-size: 1.6rem; display: block; letter-spacing: 12px;}
 .container {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1500px; margin: 0 auto;}
 .wrap {display: flex; justify-content: space-between; align-items: center;}
+.preserve-lines {white-space: pre-line;}
 /* Buttons */
-.button-primary {padding: 20px; text-align: center; min-width: 250px; border-radius: 5px; font-size: 1.25rem; background: #b3123d; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
+.button-primary {padding: 20px; text-align: center; min-width: 250px; border-radius: 3px; font-size: 1.25rem; background: #b3123d; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
 .button-primary:hover {box-shadow: none; background: #cf2452;}
 .button-round {background: #cf2452; color: #fff; font-weight: 800; padding: 5px 18px 8px 19px; border-radius: 50px; text-decoration: none; font-size: 2em; transition: .25s;}
 .button-round:hover {background: #d84a62;}
-#nav .button-nav {background: #cf2452; color: #fff; border-radius: 5px;}
+#nav .button-nav {background: #cf2452; color: #fff; border-radius: 3px;}
 #nav .button-nav:hover {background: #d84a62; color: #fff;}
-.submit {padding: 20px; min-width: 250px; border-radius: 5px; background: #cf2452; color: #fff; font-weight: 800; border: none; font-size: 1rem; letter-spacing: 1px;}
+.submit {padding: 20px; min-width: 250px; border-radius: 3px; background: #cf2452; color: #fff; font-weight: 800; border: none; font-size: 1rem; letter-spacing: 1px;}
 .submit:hover {cursor: pointer; background: #d84a62;}
 /* Navigation */
 .navbar {border-bottom: 1px solid rgba(0,0,0,.1); background: #fff;}
@@ -47,9 +48,12 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 #new-recipe {background: #eee; padding-bottom: 80px;}
 .form-blurb {font-size: 1.3rem; margin-bottom: 70px;}
 .form-wrapper {display: flex; flex-wrap: wrap; justify-content: space-between;}
-#new-recipe-form input[type="text"], #new-recipe-form select {padding: 20px; box-sizing: border-box; font-size: 1rem; width: 100%; border: 1px solid #ccc;}
+#new-recipe-form input[type="text"], #new-recipe-form select, #new-recipe textarea {padding: 20px; box-sizing: border-box; font-family: 'Nunito Sans', arial, sans-serif; font-size: 1rem; width: 100%; border: 1px solid #ccc;}
 .form-wrapper div {flex: 0 49%; margin-bottom: 20px;}
 #new-recipe sup {color: #cf2452; font-size: .8rem;}
+.form-info {color: #777; font-size: .9rem; padding-left: 9px; margin-bottom: 20px;}
+.back {display: inline-block; color: #cf2452; font-weight: bold; text-decoration: none; margin: 35px 0; transition: .25s}
+.back:hover {color: #d84a62;}
 /* Responsive */
 @media screen and (max-width: 1367px) {
     .card {flex: 0 1 49%;}
@@ -79,4 +83,5 @@ h3 {font-weight: 800; font-size: 1.1rem;}
     #nav ul li {display: block; border-bottom: 1px solid rgba(0,0,0,.1);}
     #nav ul li a {padding: 15px 20px; width: 100%; box-sizing: border-box;}
     #nav .button-nav {border-radius: 0;}
+    #new-recipe-button {position: fixed; bottom: 5px; right: 5px; z-index: 999; box-shadow: -3px 7px 15px rgba(0, 0, 0, .1);}
 }

@@ -54,7 +54,18 @@
                         </select>
                     </div>
                     <div>
-                        <h3><sup>* </sup>Recipe Tags (check all that apply):</h3>
+                        <h3><sup>* </sup>Ingredients</h3>
+                        <p class="form-info">One ingredient per line.</p>
+                        <textarea name="ingredients" id="ingredients" rows="10" required="required"></textarea>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Directions</h3>
+                        <p class="form-info">Place each step on a separate line.</p>
+                        <textarea name="directions" id="directions" rows="10" required="required"></textarea>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Recipe Tags:</h3>
+                        <p class="form-info">Check all that apply.</p>
                         <div>
                             <input type="checkbox" id="canning" name="tags[]" value="Canning">
                             <label for="canning">Canning</label>
@@ -70,6 +81,7 @@
                     </div>
                 </div>
                 <button type="submit" class="submit">Submit</button>
+                <div><a href="/recipes" class="back">Go Back</a></div>
             </form>
         </div>
     </section>
