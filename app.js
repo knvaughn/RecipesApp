@@ -6,10 +6,10 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
 var recipes = [
-    {title: 'Banana Bread', rating: 4, image: 'https://cdn.pixabay.com/photo/2014/11/03/09/39/quark-bread-514890_960_720.jpg'},
-    {title: 'Bread and Butter Pickles', rating: 5, image: 'https://cdn.pixabay.com/photo/2016/07/15/22/49/pickled-cucumbers-1520638_960_720.jpg'},
-    {title: 'Kidney Bean Salad', rating: 5, image: 'https://cdn.pixabay.com/photo/2016/06/29/09/06/kidney-bean-1486298_960_720.jpg'},
-    {title: 'Apple Pie Filling', rating: 3, image: 'https://cdn.pixabay.com/photo/2015/01/12/10/44/cake-597175_960_720.jpg'}
+    {title: 'Banana Bread', rating: 4, image: 'https://cdn.pixabay.com/photo/2014/11/03/09/39/quark-bread-514890_960_720.jpg', difficulty: "easy", time: "1 hr 30 min", tags: ["Baking"]},
+    {title: 'Bread and Butter Pickles', rating: 5, image: 'https://cdn.pixabay.com/photo/2016/07/15/22/49/pickled-cucumbers-1520638_960_720.jpg', difficulty: "easy", time: "2 hr", tags: ["Canning"]},
+    {title: 'Kidney Bean Salad', rating: 5, image: 'https://cdn.pixabay.com/photo/2016/06/29/09/06/kidney-bean-1486298_960_720.jpg', difficulty: "easy", time: "30 min", tags: ["Side Dish"]},
+    {title: 'Apple Pie Filling', rating: 3, image: 'https://cdn.pixabay.com/photo/2015/01/12/10/44/cake-597175_960_720.jpg', difficulty: "easy", time: "2 hr", tags: ["Canning", "Baking"]}
 ];
 
 app.get('/', function(req, res){

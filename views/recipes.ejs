@@ -12,12 +12,22 @@
                             </div>
                             <div class="card-content">
                                 <div class="recipe-title"><%= recipe.title %></div>
-                                <div class="recipe-rating">
-                                    <% if(recipe.rating>0){ %>
-                                        <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
-                                    <% } else { %>
-                                        <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
-                                    <% } %>
+                                <div class="recipe-tags"><%= recipe.tags.join(", "); %></div>
+                                <hr>
+                                <div class="recipe-info">
+                                    <div class="recipe-rating">
+                                        <% if(recipe.rating>0){ %>
+                                            <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
+                                        <% } else { %>
+                                            <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
+                                        <% } %>
+                                    </div>
+                                    <div class="recipe-time">
+                                        <img src="/images/clock.png" alt="Clock"> <%= recipe.time %>
+                                    </div>
+                                    <div class="recipe-difficulty">
+                                        <img src="/images/difficulty.png" alt="Chef Hat"> <%= recipe.difficulty %>
+                                    </div>
                                 </div>
                             </div>
                         </a>
