@@ -6,9 +6,12 @@ h1 {font-size: 5.5rem; margin: 30px 0;}
 .subheader-top {font-weight: normal; font-size: 1.5rem; color: #7d7d7d; display: block; font-family: 'Nunito Sans', arial, sans-serif; line-height: 1;}
 .subheader-bottom {font-weight: normal; font-size: 1.6rem; display: block; letter-spacing: 12px;}
 .container {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1500px; margin: 0 auto;}
+.wrap {display: flex; justify-content: space-between; align-items: center;}
 /* Buttons */
-.button-primary {padding: 20px; text-align: center; min-width: 250px; font-size: 1.25rem; background: #971033; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
-.button-primary:hover {box-shadow: none; background: #7a0d29;}
+.button-primary {padding: 20px; text-align: center; min-width: 250px; font-size: 1.25rem; background: #b3123d; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
+.button-primary:hover {box-shadow: none; background: #cf2452;}
+.button-round {background: #cf2452; color: #fff; font-weight: 800; padding: 5px 18px 8px 19px; border-radius: 50px; text-decoration: none; font-size: 2em; transition: .25s;}
+.button-round:hover {background: #d84a62;}
 /* Navigation */
 .navbar {border-bottom: 1px solid rgba(0,0,0,.1); background: #fff;}
 .navbar .container {display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;}
