@@ -1,0 +1,62 @@
+<% include partials/header-inner %>
+
+<main>
+    <div class="container">
+        <h1>Add a New Recipe</h1>
+        <form action="/recipes" method="POST">
+            <h2>Recipe Title:</h2>
+            <input name="recipetitle" type="text" placeholder="Recipe Title">
+            <h2>Image URL:</h2>
+            <input name="imageurl" type="text" placeholder="Image URL">
+            <h2>Recipe Difficulty:</h2>
+            <select name="difficulty" id="dificulty">
+                <option value="easy">easy</option>
+                <option value="moderate">moderate</option>
+                <option value="hard">hard</option>
+            </select>
+            <h2>Total Prep and Cook Time:</h2>
+            <select name="time" id="time">
+                <option value="15 min">15 min</option>
+                <option value="30 min">30 min</option>
+                <option value="45 min">45 min</option>
+                <option value="1 hr">1 hr</option>
+                <option value="1 hr 15 min">1 hr 15 min</option>
+                <option value="1 hr 30 min">1 hr 30 min</option>
+                <option value="1 hr 45 min">1 hr 45 min</option>
+                <option value="2 hr">2 hr</option>
+                <option value="2 hr 15 min">2 hr 15 min</option>
+                <option value="2 hr 30 min">2 hr 30 min</option>
+                <option value="2 hr 45 min">2 hr 45 min</option>
+                <option value="3 hr">3 hr</option>
+                <option value="3 hr 15 min">3 hr 15 min</option>
+                <option value="3 hr 30 min">3 hr 30 min</option>
+                <option value="3 hr 45 min">3 hr 45 min</option>
+                <option value="4 hr">4 hr</option>
+                <option value="4 hr 15 min">4 hr 15 min</option>
+                <option value="4 hr 30 min">4 hr 30 min</option>
+                <option value="4 hr 45 min">4 hr 45 min</option>
+                <option value="5 hr">5 hr</option>
+                <option value="5 hr 15 min">5 hr 15 min</option>
+                <option value="5 hr 30 min">5 hr 30 min</option>
+                <option value="5 hr 45 min">5 hr 45 min</option>
+                <option value="6 hr">6 hr</option>
+            </select>
+            <h2>Recipe Tags (Select all that apply):</h2>
+            <div>
+                <input type="checkbox" id="canning" name="tags[]" value="Canning">
+                <label for="canning">Canning</label>
+            </div>
+            <div>
+                <input type="checkbox" id="baking" name="tags[]" value="Baking">
+                <label for="baking">Baking</label>
+            </div>
+            <div>
+                <input type="checkbox" id="side-dish" name="tags[]" value="Side Dish">
+                <label for="side-dish">Side Dish</label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+
+<% include partials/footer %>

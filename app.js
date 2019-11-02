@@ -20,15 +20,30 @@ app.get('/recipes', function(req, res){
     res.render('recipes', {recipes: recipes});
 });
 
+app.post('/recipes', function(req, res){
+    var recipeTitle = req.body.recipetitle;
+    var imageURL = req.body.imageurl;
+    var recipeDifficulty = req.body.difficulty;
+    var recipeTime = req.body.time;
+    var recipeTags = req.body.tags;
+    recipes.push({
+        title: recipeTitle, 
+        rating: 0,
+        image: imageURL,
+        difficulty: recipeDifficulty,
+        time: recipeTime,
+        tags: recipeTags
+    });
+    res.redirect('recipes');
+});
+
+app.get('/recipes/new', function(req, res) {
+    res.render('new');
+});
+
 app.get('/recipes/:recipe', function(req, res){
     var recipe = req.params.recipe;
     res.render('recipe', {recipeName: recipe});
-});
-
-app.post('/newrecipe', function(req, res){
-    var recipeTitle = req.body.recipetitle;
-    recipes.push({title: recipeTitle, rating: 0});
-    res.redirect('recipes');
 });
 
 app.listen(3000, function(){
