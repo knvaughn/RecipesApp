@@ -2,29 +2,30 @@
 body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0;}
 h1, h2 {font-family: 'Vidaloka', serif;}
 h1 {font-size: 5.5rem; margin: 30px 0;}
-#inner h1 {font-size: 3rem;}
+#inner h1 {font-size: 3rem; margin: 0; padding: 80px 0;}
 .subheader-top {font-weight: normal; font-size: 1.5rem; color: #7d7d7d; display: block; font-family: 'Nunito Sans', arial, sans-serif; line-height: 1;}
 .subheader-bottom {font-weight: normal; font-size: 1.6rem; display: block; letter-spacing: 12px;}
-.container {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1200px; margin: 0 auto;}
+.container {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1500px; margin: 0 auto;}
 /* Buttons */
 .button-primary {padding: 20px; text-align: center; min-width: 250px; font-size: 1.25rem; background: #971033; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
 .button-primary:hover {box-shadow: none; background: #7a0d29;}
 /* Navigation */
 .navbar {border-bottom: 1px solid rgba(0,0,0,.1); background: #fff;}
-.navbar .container {display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; max-width: 1500px;}
+.navbar .container {display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;}
 #logo-dark {width: 150px;}
 .logo-link {display: inline-block;}
 #nav ul {margin: 0; padding: 0;}
 #nav ul li {list-style-type: none; display: inline-block;}
-#nav ul li a {text-decoration: none; display: inline-block; padding: 0px 10px; color: #000; transition: .25s;}
+#nav ul li a {text-decoration: none; display: inline-block; padding: 0px 10px; color: #000; transition: .25s; font-weight: 600;}
 #nav ul li a:hover {color: #999;}
 /* Header */
 .homepage-header {background: #eee; display: flex; align-items: center; justify-content: center; min-height: 550px; position: relative; flex-wrap: wrap; padding: 20px;}
 .header-caption {margin: 50px 0 60px; font-size: 1.3rem; width: 100%; max-width: 375px;}
 /* Recipes */
-#recipes {display: flex; flex-wrap: wrap; justify-content: space-between;}
+#recipes {background: #eee; padding-bottom: 50px;}
+#recipe-cards {display: flex; flex-wrap: wrap; justify-content: space-between;}
 .card {border-radius: 20px; flex: 0 1 24%;}
-#recipes .card a {text-decoration: none; color: #000;}
+#recipe-cards .card a {text-decoration: none; color: #000;}
 .thumbnail {border-radius: 20px; box-shadow: 0px 7px 15px rgba(0, 0, 0, .08); position: relative; width: 100%; padding-top: 100%; overflow: hidden;}
 .thumbnail-image {display: block; min-width: 100%; height: 100%; width: auto; border-radius: 20px; position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 .card-content {padding: 15px; border-radius: 20px; box-shadow: 0px 7px 15px rgba(0, 0, 0, .08); width: 75%; margin: 0 auto; position: relative; top: -70px; background: linear-gradient(rgba(255,255,255,.9) 20%, rgba(255,255,255,.99) 60%);}
