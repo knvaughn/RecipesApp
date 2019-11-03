@@ -2,7 +2,8 @@ var express         = require('express'),
     app             = express(),
     bodyParser      = require('body-parser'),
     mongoose        = require('mongoose'),
-    methodOverride  = require('method-override');
+    methodOverride  = require('method-override'),
+    Recipe          = require('./models/recipe');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -11,21 +12,6 @@ app.use(methodOverride('_method'));
 
 // Connect to Database
 mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true});
-
-// Schema setup
-var recipeSchema = new mongoose.Schema({
-    title: String,
-    rating: Number,
-    image: String,
-    difficulty: String,
-    time: String,
-    tags: Array,
-    ingredients: String,
-    directions: String
-});
-
-// Model setup
-var Recipe = mongoose.model("Recipe", recipeSchema);
 
 // var relish = new Recipe({
 //     title: 'Relish',
