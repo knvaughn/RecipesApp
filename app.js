@@ -18,15 +18,22 @@ mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTop
 
 // RESTFUL ROUTES - a way of mapping HTTP routes and CRUD (Create, Read, Update, Destroy)
 //
-// name        url                  verb        description
+// name        url                      verb        description
 // ==============================================================================================
-// INDEX     /recipes               GET        get all recipes
-// NEW       /recipes/new           GET        displays form to create new recipe
-// CREATE    /recipes               POST       add new recipe to the database
-// SHOW      /recipes/:id           GET        shows info about one recipe
-// EDIT      /recipes/:id/edit      GET        displays edit form to edit a recipe
-// UPDATE    /recipes/:id           PUT        updates a specific recipe and redirects somewhere
-// DESTROY   /recipes/:id           DELETE     deletes a specific recipe and redirects somewhere    
+// INDEX     /recipes                   GET        get all recipes
+// NEW       /recipes/new               GET        displays form to create new recipe
+// CREATE    /recipes                   POST       add new recipe to the database
+// SHOW      /recipes/:id               GET        shows info about one recipe
+// EDIT      /recipes/:id/edit          GET        displays edit form to edit a recipe
+// UPDATE    /recipes/:id               PUT        updates a specific recipe and redirects somewhere
+// DESTROY   /recipes/:id               DELETE     deletes a specific recipe and redirects somewhere    
+// ==============================================================================================
+//
+// NESTED ROUTES
+//
+// NEW       /recipes/:id/comments/new  GET
+// CREATE    /recipes/:id/comments      POST
+//
 // ==============================================================================================
 
 app.get('/', function(req, res){
@@ -41,7 +48,7 @@ app.get('/recipes', function(req, res){
             console.log(err);
         } else {
             // Render the recipes page and pass through the recipes from database
-            res.render('index', {recipes: recipes});
+            res.render('recipes/index', {recipes: recipes});
         }
     });
 });
@@ -77,7 +84,7 @@ app.post('/recipes', function(req, res){
 
 // NEW
 app.get('/recipes/new', function(req, res) {
-    res.render('new');
+    res.render('recipes/new');
 });
 
 // SHOW
@@ -88,7 +95,7 @@ app.get('/recipes/:id', function(req, res){
             res.redirect('/recipes');
         } else {
             // Render the show page and pass through the specific recipe from database
-            res.render('show', {recipe: recipe});
+            res.render('recipes/show', {recipe: recipe});
         }
     });
 });
@@ -101,7 +108,7 @@ app.get('/recipes/:id/edit', function(req, res){
             res.redirect('/recipes');
         } else {
             // Render the edit page and pass through the specific recipe from database
-            res.render('edit', {recipe: recipe});
+            res.render('recipes/edit', {recipe: recipe});
         }
     });
 })
@@ -147,6 +154,13 @@ app.delete('/recipes/:id', function(req, res) {
             res.redirect('/recipes');
         }
     });
+});
+
+// ==================
+// COMMENTS ROUTES
+// ==================
+app.get('/recipes/:id/comments/new', function(req, res) {
+    res.render('comments/new');
 });
 
 app.listen(3000, function(){
