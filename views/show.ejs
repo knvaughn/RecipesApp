@@ -52,6 +52,13 @@
             </section>
         </div>
     </div>
+    <section id="comments">
+        <div class="container-small">
+            <% recipe.comments.forEach(function(comment) { %>
+                <p><strong><%= comment.author %></strong> - <%= comment.text %></p>
+            <% }); %>
+        </div>
+    </section>
 </main>
 
 <% include partials/footer %>

@@ -3,7 +3,10 @@ var express         = require('express'),
     bodyParser      = require('body-parser'),
     mongoose        = require('mongoose'),
     methodOverride  = require('method-override'),
-    Recipe          = require('./models/recipe');
+    Recipe          = require('./models/recipe'),
+    seedDB          = require('./seeds');
+
+seedDB();
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -12,22 +15,6 @@ app.use(methodOverride('_method'));
 
 // Connect to Database
 mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true});
-
-// var relish = new Recipe({
-//     title: 'Relish',
-//     image: 'https://cdn.pixabay.com/photo/2015/02/06/15/50/canning-626204_960_720.jpg',
-//     difficulty: "easy",
-//     time: "2 hr",
-//     tags: ["Canning"]
-// });
-// relish.save(function(err, recipe){
-//     if(err) {
-//         console.log("Error");
-//     } else {
-//         console.log("Success! Newly created: ");
-//         console.log(recipe);
-//     }
-// });
 
 // RESTFUL ROUTES - a way of mapping HTTP routes and CRUD (Create, Read, Update, Destroy)
 //
@@ -95,7 +82,7 @@ app.get('/recipes/new', function(req, res) {
 
 // SHOW
 app.get('/recipes/:id', function(req, res){
-    Recipe.findById(req.params.id, function(err, recipe) {
+    Recipe.findById(req.params.id).populate("comments").exec(function(err, recipe) {
         if(err) {
             console.log(err);
             res.redirect('/recipes');
@@ -165,3 +152,19 @@ app.delete('/recipes/:id', function(req, res) {
 app.listen(3000, function(){
     console.log('Starting app on port 3000');
 });
+
+// var relish = new Recipe({
+//     title: 'Relish',
+//     image: 'https://cdn.pixabay.com/photo/2015/02/06/15/50/canning-626204_960_720.jpg',
+//     difficulty: "easy",
+//     time: "2 hr",
+//     tags: ["Canning"]
+// });
+// relish.save(function(err, recipe){
+//     if(err) {
+//         console.log("Error");
+//     } else {
+//         console.log("Success! Newly created: ");
+//         console.log(recipe);
+//     }
+// });
