@@ -1,11 +1,13 @@
-var express     = require('express'),
-    app         = express(),
-    bodyParser  = require('body-parser'),
-    mongoose    = require('mongoose');
+var express         = require('express'),
+    app             = express(),
+    bodyParser      = require('body-parser'),
+    mongoose        = require('mongoose'),
+    methodOverride  = require('method-override');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 // Connect to Database
 mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true});
@@ -18,7 +20,7 @@ var recipeSchema = new mongoose.Schema({
     difficulty: String,
     time: String,
     tags: Array,
-    ingredients: Array,
+    ingredients: String,
     directions: String
 });
 
@@ -87,7 +89,7 @@ app.post('/recipes', function(req, res){
         difficulty: recipeDifficulty,
         time: recipeTime,
         tags: recipeTags,
-        ingredients: recipeIngredients.split("\n"),
+        ingredients: recipeIngredients,
         directions: recipeDirections
     }
     // Create new recipe and save to database
@@ -110,9 +112,66 @@ app.get('/recipes/:id', function(req, res){
     Recipe.findById(req.params.id, function(err, recipe) {
         if(err) {
             console.log(err);
+            res.redirect('/recipes');
         } else {
             // Render the show page and pass through the specific recipe from database
             res.render('show', {recipe: recipe});
+        }
+    });
+});
+
+// EDIT
+app.get('/recipes/:id/edit', function(req, res){
+    Recipe.findById(req.params.id, function(err, recipe) {
+        if(err) {
+            console.log(err);
+            res.redirect('/recipes');
+        } else {
+            // Render the edit page and pass through the specific recipe from database
+            res.render('edit', {recipe: recipe});
+        }
+    });
+})
+
+// UPDATE
+app.put('/recipes/:id', function(req, res) {
+    var recipeTitle = req.body.recipetitle;
+    var imageURL = req.body.imageurl;
+    var recipeDifficulty = req.body.difficulty;
+    var recipeTime = req.body.time;
+    var recipeTags = req.body.tags;
+    var recipeIngredients = req.body.ingredients;
+    var recipeDirections = req.body.directions;
+    var recipeRating = req.body.recipeRating;
+    var recipeID = req.params.id;
+    var updatedRecipe = {
+        title: recipeTitle, 
+        rating: recipeRating,
+        image: imageURL,
+        difficulty: recipeDifficulty,
+        time: recipeTime,
+        tags: recipeTags,
+        ingredients: recipeIngredients,
+        directions: recipeDirections
+    }
+    // Find the existing recipe and update it
+    Recipe.findByIdAndUpdate(recipeID, updatedRecipe, function(err, updatedRecipe) {
+        if(err) {
+            console.log(err)
+        } else {
+            res.redirect(`/recipes/${recipeID}`);
+        }
+    });
+});
+
+// DELETE
+app.delete('/recipes/:id', function(req, res) {
+    Recipe.findByIdAndRemove(req.params.id, function(err) {
+        if(err) {
+            console.log(err);
+            res.redirect('/recipes');
+        } else {
+            res.redirect('/recipes');
         }
     });
 });

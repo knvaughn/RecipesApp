@@ -1,5 +1,5 @@
 /* General */
-body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0;}
+body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0; font-size: 16px;}
 h1, h2 {font-family: 'Vidaloka', serif;}
 h1 {font-size: 5.5rem; margin: 30px 0;}
 .subheader {color: #cf2452;}
@@ -33,6 +33,17 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 .inner-header {background: #eee;}
 .hero {position: relative; padding-top: 500px; overflow: hidden;}
 .hero img {position: absolute; top: 0; right: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: auto; height: auto; min-height: 100%; min-width: 100%;}
+/* Browse */
+#browse {padding: 50px 0;}
+#browse h2 {margin-bottom: 40px;}
+#browse h3 {color: #aaa; font-size: .9rem; margin-bottom: 20px;}
+.category-wrapper {display: flex; flex-wrap: wrap; justify-content: space-between;}
+.category {margin-bottom: 40px; flex: 0 1 12%;}
+.category ul {margin: 0; padding: 0;}
+.category ul li {list-style-type: none; padding: 5px 0;}
+.category ul li a {text-decoration: none; color: #000; font-weight: bold;}
+.category-image {flex: 0 1 50%;}
+.category-image img {width: 100%; height: auto;}
 /* Recipes */
 #recipes {background: #eee; padding-bottom: 50px;}
 #recipe-cards {display: flex; flex-wrap: wrap; justify-content: space-between;}
@@ -66,8 +77,12 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 .container-small .card-content {padding-top: 30px;}
 .container-small .card-content .recipe-info {justify-content: space-around; box-sizing: border-box; width: 100%; max-width: 400px; margin: 0 auto;}
 .container-small .recipe-tags {margin: -30px 0 20px; font-weight: normal;}
-.rate-recipe {width: 55px; height: 55px; background: #fff; border-radius: 50%; position: absolute; top: -30px; right: 20px; display: flex; align-items: center; justify-content: center;;}
+.action-buttons {position: absolute; top: -35px; right: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
+.action-button {width: 55px; height: 55px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 5px;}
 #ingredients, #directions {padding-bottom: 50px;}
+/* Edit Recipes */
+#delete-recipe-button {padding: 8px 9px 0px 9px; border: none; box-shadow: none;}
+#delete-recipe-button:hover {cursor: pointer;}
 /* Footer */
 footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; font-weight: 600;}
 /* Responsive */
@@ -89,6 +104,8 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
     #inner .container-small h1 {font-size: 2rem;}
     .card {flex: 0 1 49%;}
     #ingredients, #directions {flex: 0 1 100%;}
+    .category {flex: 0 1 25%;}
+    .category-image {flex: 0 1 100%;}
 }
 @media screen and (min-width: 768px) {
     .toggle-menu, .close-menu {display: none;}
@@ -103,6 +120,12 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
     #nav ul li {display: block; border-bottom: 1px solid rgba(0,0,0,.1);}
     #nav ul li a {padding: 15px 20px; width: 100%; box-sizing: border-box;}
     #nav .button-nav {border-radius: 0;}
-    #new-recipe-button {position: fixed; bottom: 5px; right: 5px; z-index: 999; box-shadow: -3px 7px 15px rgba(0, 0, 0, .1);}
+    #new-recipe-button, #delete-recipe-button {position: fixed; bottom: 5px; right: 5px; z-index: 999; box-shadow: -3px 7px 15px rgba(0, 0, 0, .1);}
     .container-small .card-content {width: 100%; box-sizing: border-box;}
+    .action-buttons {top: -202px; right: -5px; width: 65px;}
+    .action-button {flex: 0 1 100%;}
+    .category {flex: 0 1 50%;}
+}
+@media screen and (max-width: 400px) {
+    .category {flex: 0 1 100%;}
 }

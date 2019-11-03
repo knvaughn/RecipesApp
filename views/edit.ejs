@@ -1,0 +1,77 @@
+<% include partials/header-inner %>
+
+<main>
+    <section id="new-recipe">
+        <div class="container">
+            <div class="wrap">
+                <h1><%= recipe.title %></h1>
+                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="button-round" id="delete-recipe-button"><img src="/images/trash.png" alt="Trash can"></button>
+                </form>
+            </div>
+            <h2 class="subheader">Edit your recipe details below.</h2>
+            <p class="form-blurb">Review and submit the following information to update your <%= recipe.title %> recipe! </p>
+            <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" id="new-recipe-form">
+                <div class="form-wrapper">
+                    <div>
+                        <h3><sup>* </sup>Recipe Title:</h3>
+                        <input name="recipetitle" type="text" value="<%= recipe.title %>" required="required">
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Image URL:</h3>
+                        <input name="imageurl" type="text" value="<%= recipe.image %>" required="required">
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Recipe Difficulty:</h3>
+                        <% var difficultyOptions = ["easy", "moderate", "hard"]; %>
+                        <select name="difficulty" id="difficulty" required="required">
+                            <% difficultyOptions.forEach(function(option) { %>
+                                <% var selected = (option == recipe.difficulty) ? "selected" : ""; %>
+                                <option value="<%= option %>" <%= selected %>><%= option %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Total Prep &plus; Cook Time:</h3>
+                        <% var timeOptions = ["15 min", "30 min", "45 min", "1 hr", "1 hr 15 min", "1 hr 30 min", "1 hr 45 min", "2 hr", "2 hr 15 min", "2 hr 30 min", "2 hr 45 min", "3 hr", "3 hr 15 min", "3 hr 30 min", "3 hr 45 min", "4 hr", "4 hr 15 min", "4 hr 30 min", "4 hr 45 min", "5 hr", "5 hr 15 min", "5 hr 30 min", "5 hr 45 min", "6 hr"]; %>
+                        <select name="time" id="time" required="required">
+                            <% timeOptions.forEach(function(option) { %>
+                                <% var selected = (option == recipe.time) ? "selected" : ""; %>
+                                <option value="<%= option %>" <%= selected %>><%= option %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Ingredients</h3>
+                        <p class="form-info">One ingredient per line.</p>
+                        <textarea name="ingredients" id="ingredients" rows="10" required="required"><%= recipe.ingredients %></textarea>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Directions</h3>
+                        <p class="form-info">Place each step on a separate line.</p>
+                        <textarea name="directions" id="directions" rows="10" required="required"><%= recipe.directions %></textarea>
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Recipe Tags:</h3>
+                        <p class="form-info">Check all that apply.</p>
+                        <% var checkBoxes = ["Canning", "Baking", "Side Dish"]; %>
+                        <% var checked = ""; %>
+                        <% checkBoxes.forEach(function(checkbox) { %>
+                            <% var foundTag = recipe.tags.includes(checkbox) %>
+                            <% checked = (foundTag == true) ? "checked" : ""; %>
+                            <div>
+                                <input id="<%= checkbox %>" type="checkbox" name="tags[]" value="<%= checkbox %>" <%= checked %>>
+                                <label for="<%= checkbox %>"><%= checkbox %></label>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+                <input type="hidden" name="recipeRating" value="<%= recipe.rating %>">
+                <button type="submit" class="submit">Save Recipe</button>
+                <div><a href="/recipes/<%= recipe._id %>" class="back">Cancel</a></div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<% include partials/footer %>

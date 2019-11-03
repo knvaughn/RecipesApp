@@ -11,8 +11,16 @@
     <div class="container-small">
         <div class="card">
             <div class="card-content">
-                <div class="rate-recipe">
-                    <img src="/images/open-star.png" alt="Open Star">
+                <div class="action-buttons">
+                    <a class="rate-recipe action-button">
+                        <img src="/images/open-star.png" alt="Open Star">
+                    </a>
+                    <a href="/recipes/<%= recipe._id %>/edit" class="edit-recipe action-button">
+                        <img src="/images/pencil.png" alt="Pencil">
+                    </a>
+                    <a class="favorite-recipe action-button">
+                        <img src="/images/open-heart.png" alt="Open Heart">
+                    </a>
                 </div>
                 <h1><%= recipe.title %></h1>
                 <div class="recipe-info">
@@ -20,7 +28,7 @@
                         <% if(recipe.rating>0){ %>
                             <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
                         <% } else { %>
-                            <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
+                            <img src="/images/empty-star.png" alt="Gray Star">
                         <% } %>
                     </div>
                     <div class="recipe-time">
@@ -36,9 +44,7 @@
         <div class="wrap-even">
             <section id="ingredients">
                 <h2>Ingredients</h2>
-                <% recipe.ingredients.forEach(function(ingredient) { %>
-                    <p><%= ingredient %></p>
-                <% }); %>
+                <p class="preserve-lines"><%= recipe.ingredients %></p>
             </section>
             <section id="directions">
                 <h2>Directions</h2>
