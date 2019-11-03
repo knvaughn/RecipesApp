@@ -4,9 +4,10 @@ var express         = require('express'),
     mongoose        = require('mongoose'),
     methodOverride  = require('method-override'),
     Recipe          = require('./models/recipe'),
+    Comment         = require('./models/comment'),
     seedDB          = require('./seeds');
 
-seedDB();
+// seedDB();
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -160,7 +161,39 @@ app.delete('/recipes/:id', function(req, res) {
 // COMMENTS ROUTES
 // ==================
 app.get('/recipes/:id/comments/new', function(req, res) {
-    res.render('comments/new');
+    Recipe.findById(req.params.id, function(err, recipe) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('comments/new', {recipe: recipe});
+        }
+    });
+});
+
+app.post('/recipes/:id/comments', function(req, res) {
+    //Lookup recipe
+    Recipe.findById(req.params.id, function(err, recipe) {
+        if(err){
+            console.log(err);
+            res.redirect('/recipes');
+        } else {
+            //Create new comment
+            Comment.create(req.body.comment, function(err, comment) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    //Connect comment to recipe
+                    recipe.comments.push(comment);
+                    recipe.save();
+                    //Redirect to the recipe show page
+                    res.redirect(`/recipes/${recipe._id}`);
+                }
+            });
+        }
+    });
+    
+    
+    
 });
 
 app.listen(3000, function(){

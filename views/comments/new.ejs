@@ -1,1 +1,27 @@
-<h1>Hello world</h1>
+<% include ../partials/header-inner %>
+
+<main>
+    <section id="new-recipe">
+        <div class="container">
+            <h1>Leave a Comment</h1>
+            <h2 class="subheader">Tell us what you think!</h2>
+            <p class="form-blurb">The most useful comments include feedback and ratings on the recipe, ingredients you modified, or helping other commenters.</p>
+            <form action="/recipes/<%= recipe._id %>/comments" method="POST" id="new-recipe-form">
+                <div class="form-wrapper">
+                    <div>
+                        <h3><sup>* </sup>Author:</h3>
+                        <input name="comment[author]" type="text" placeholder="Your Name" required="required">
+                    </div>
+                    <div>
+                        <h3><sup>* </sup>Comment:</h3>
+                        <input name="comment[text]" type="text" placeholder="Comment..." required="required">
+                    </div>
+                </div>
+                <button type="submit" class="submit">Submit</button>
+                <div><a href="/recipes/<%= recipe._id %>" class="back">Go Back</a></div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<% include ../partials/footer %>

@@ -54,9 +54,17 @@
     </div>
     <section id="comments">
         <div class="container-small">
+            <h2>Comments</h2>
+            <div class="comments-divider">
+                <img src="/images/comments-divider.png" alt="Comments divider">
+            </div>
             <% recipe.comments.forEach(function(comment) { %>
-                <p><strong><%= comment.author %></strong> - <%= comment.text %></p>
+                <div class="comment">
+                    <h3><%= comment.author %></h3>
+                    <p><%= comment.text %></p>
+                </div>
             <% }); %>
+            <a href="/recipes/<%= recipe._id %>/comments/new" class="add-comment-button">Add Comment</a>
         </div>
     </section>
 </main>
