@@ -85,10 +85,12 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 #comments {padding: 50px 20px; background: #eee; box-sizing: border-box;}
 #comments .container-small {background: #fff; border-radius: 20px; padding: 20px; box-sizing: border-box;}
 .comment {border-bottom: 1px solid #ececec;}
+.comment:last-child {border: none;}
 .comment h3 {color: #e62457; font-size: 1rem;}
 .comment p {font-size: .9rem;}
 .add-comment-button {display: inline-block; background: #61d4e7; color: #fff; padding: 5px 15px; border-radius: 3px; margin: 15px 0; text-decoration: none; transition: .25s;}
 .add-comment-button:hover {background: rgba(97, 212, 231, .8);}
+#new-comment-button {font-size: 1.5rem; font-weight: bold; border-radius: 50px; padding: 3px 12px;}
 /* Edit Recipes */
 #delete-recipe-button {padding: 8px 9px 0px 9px; border: none; box-shadow: none;}
 #delete-recipe-button:hover {cursor: pointer;}
