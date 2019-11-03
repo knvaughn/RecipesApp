@@ -1,37 +1,50 @@
 <% include partials/header-inner %>
 
-<header>
-    <div class="container">
-        <h1><%= recipe.title %></h1>
+<header class="inner-header">
+    <div class="container-small">
+        <div class="hero">
+            <img src="<%= recipe.image %>" alt="Recipe">
+        </div>
     </div>
 </header>
-<main>
-    <div class="container">
-        <img src="<%= recipe.image %>" alt="Recipe">
-        <h2>Delicious <%= recipe.title %></h2>
-        <div class="recipe-tags"><%= recipe.tags.join(", "); %></div>
-        <hr>
-        <div class="recipe-info">
-            <div class="recipe-rating">
-                <% if(recipe.rating>0){ %>
-                    <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
-                <% } else { %>
-                    <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
-                <% } %>
-            </div>
-            <div class="recipe-time">
-                <img src="/images/clock.png" alt="Clock"> <%= recipe.time %>
-            </div>
-            <div class="recipe-difficulty">
-                <img src="/images/difficulty.png" alt="Chef Hat"> <%= recipe.difficulty %>
+<main id="main">
+    <div class="container-small">
+        <div class="card">
+            <div class="card-content">
+                <div class="rate-recipe">
+                    <img src="/images/open-star.png" alt="Open Star">
+                </div>
+                <h1><%= recipe.title %></h1>
+                <div class="recipe-info">
+                    <div class="recipe-rating">
+                        <% if(recipe.rating>0){ %>
+                            <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
+                        <% } else { %>
+                            <img src="/images/empty-star.png" alt="Gray Star"> <span>--</span>
+                        <% } %>
+                    </div>
+                    <div class="recipe-time">
+                        <img src="/images/clock.png" alt="Clock"> <%= recipe.time %>
+                    </div>
+                    <div class="recipe-difficulty">
+                        <img src="/images/difficulty.png" alt="Chef Hat"> <%= recipe.difficulty %>
+                    </div>
+                </div>
             </div>
         </div>
-        <h3>Ingredients</h3>
-        <% recipe.ingredients.forEach(function(ingredient) { %>
-            <p><%= ingredient %></p>
-        <% }); %>
-        <h3>Directions</h3>
-        <p class="preserve-lines"><%= recipe.directions %></p>
+        <div class="recipe-tags"><strong>Categories: </strong><%= recipe.tags.join(", "); %></div>
+        <div class="wrap-even">
+            <section id="ingredients">
+                <h2>Ingredients</h2>
+                <% recipe.ingredients.forEach(function(ingredient) { %>
+                    <p><%= ingredient %></p>
+                <% }); %>
+            </section>
+            <section id="directions">
+                <h2>Directions</h2>
+                <p class="preserve-lines"><%= recipe.directions %></p>
+            </section>
+        </div>
     </div>
 </main>
 

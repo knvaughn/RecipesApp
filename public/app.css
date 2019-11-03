@@ -2,14 +2,13 @@
 body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0;}
 h1, h2 {font-family: 'Vidaloka', serif;}
 h1 {font-size: 5.5rem; margin: 30px 0;}
-h2 {color: #cf2452;}
+.subheader {color: #cf2452;}
 h3 {font-weight: 800; font-size: 1.1rem;}
-#inner h1 {font-size: 3rem; margin: 0; padding: 80px 0;}
+#inner h1 {text-align: left; font-size: 3rem; margin: 0; padding: 60px 0;}
 .subheader-top {font-weight: normal; font-size: 1.5rem; color: #7d7d7d; display: block; font-family: 'Nunito Sans', arial, sans-serif; line-height: 1;}
 .subheader-bottom {font-weight: normal; font-size: 1.6rem; display: block; letter-spacing: 12px;}
 .container {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1500px; margin: 0 auto;}
 .wrap {display: flex; justify-content: space-between; align-items: center;}
-.preserve-lines {white-space: pre-line;}
 /* Buttons */
 .button-primary {padding: 20px; text-align: center; min-width: 250px; border-radius: 3px; font-size: 1.25rem; background: #b3123d; font-weight: 800; box-shadow: 8px 8px 0 rgba(151, 16, 51,.2); display: inline-block; color: #fff; text-decoration: none; transition: .25s;}
 .button-primary:hover {box-shadow: none; background: #cf2452;}
@@ -31,6 +30,9 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 /* Header */
 .homepage-header {background: #eee; display: flex; align-items: center; justify-content: center; min-height: 550px; position: relative; flex-wrap: wrap; padding: 20px;}
 .header-caption {margin: 50px 0 60px; font-size: 1.3rem; width: 100%; max-width: 375px;}
+.inner-header {background: #eee;}
+.hero {position: relative; padding-top: 500px; overflow: hidden;}
+.hero img {position: absolute; top: 0; right: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: auto; height: auto; min-height: 100%; min-width: 100%;}
 /* Recipes */
 #recipes {background: #eee; padding-bottom: 50px;}
 #recipe-cards {display: flex; flex-wrap: wrap; justify-content: space-between;}
@@ -54,9 +56,23 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 .form-info {color: #777; font-size: .9rem; padding-left: 9px; margin-bottom: 20px;}
 .back {display: inline-block; color: #cf2452; font-weight: bold; text-decoration: none; margin: 35px 0; transition: .25s}
 .back:hover {color: #d84a62;}
+/* Show Recipes */
+.container-small {padding: 0 20px; box-sizing: border-box; width: 100%; max-width: 1000px; margin: 0 auto;}
+.wrap-even {display: flex; align-items: flex-start; flex-wrap: wrap; justify-content: space-between;}
+#ingredients {flex: 0 1 30%;}
+#directions {flex: 0 1 68%;}
+.preserve-lines {white-space: pre-line;}
+#inner .container-small h1 {padding: 10px 0 20px; text-align: center;}
+.container-small .card-content {padding-top: 30px;}
+.container-small .card-content .recipe-info {justify-content: space-around; box-sizing: border-box; width: 100%; max-width: 400px; margin: 0 auto;}
+.container-small .recipe-tags {margin: -30px 0 20px; font-weight: normal;}
+.rate-recipe {width: 55px; height: 55px; background: #fff; border-radius: 50%; position: absolute; top: -30px; right: 20px; display: flex; align-items: center; justify-content: center;;}
+#ingredients, #directions {padding-bottom: 50px;}
+/* Footer */
+footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; font-weight: 600;}
 /* Responsive */
 @media screen and (max-width: 1367px) {
-    .card {flex: 0 1 49%;}
+    .card {flex: 0 1 32%;}
 }
 @media screen and (max-width: 1200px) {
     .navbar {border-bottom: 1px solid rgba(0,0,0,.1);}
@@ -69,6 +85,10 @@ h3 {font-weight: 800; font-size: 1.1rem;}
     .header-caption {margin: 50px auto 60px;}
     .header-image {order: 2; width: 80%; max-width: 600px; margin: 0 50px; box-sizing: border-box;}
     .form-wrapper div {flex: 0 100%;}
+    .inner-header .container-small {padding: 0;}
+    #inner .container-small h1 {font-size: 2rem;}
+    .card {flex: 0 1 49%;}
+    #ingredients, #directions {flex: 0 1 100%;}
 }
 @media screen and (min-width: 768px) {
     .toggle-menu, .close-menu {display: none;}
@@ -76,7 +96,7 @@ h3 {font-weight: 800; font-size: 1.1rem;}
 }
 @media screen and (max-width: 767px) {
     #logo-dark {width: 100px;}
-    .card {flex: 0 1 100%;}
+    .card, .wrap-even section {flex: 0 1 100%;}
     .navbar {position: relative;}
     .close-menu {display: none;}
     #nav ul {display: none; position: absolute; top: 59px; right: 0; width: 100%; box-sizing: border-box; z-index: 991; background: #fff;}
@@ -84,4 +104,5 @@ h3 {font-weight: 800; font-size: 1.1rem;}
     #nav ul li a {padding: 15px 20px; width: 100%; box-sizing: border-box;}
     #nav .button-nav {border-radius: 0;}
     #new-recipe-button {position: fixed; bottom: 5px; right: 5px; z-index: 999; box-shadow: -3px 7px 15px rgba(0, 0, 0, .1);}
+    .container-small .card-content {width: 100%; box-sizing: border-box;}
 }
