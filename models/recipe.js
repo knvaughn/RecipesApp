@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 var recipeSchema = new mongoose.Schema({
     title: String,
-    rating: Number,
     image: String,
     difficulty: String,
     time: String,
@@ -13,6 +12,12 @@ var recipeSchema = new mongoose.Schema({
         {
            type: mongoose.Schema.Types.ObjectId,
            ref: "Comment"
+        }
+    ],
+    ratings: [
+        {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "Rating"
         }
     ]
 });

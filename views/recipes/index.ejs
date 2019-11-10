@@ -17,8 +17,17 @@
                                 <hr>
                                 <div class="recipe-info">
                                     <div class="recipe-rating">
-                                        <% if(recipe.rating>0){ %>
-                                            <img src="/images/full-star.png" alt="Yellow Star"> <%= recipe.rating %>
+                                        <% var ratingSum = 0; %>
+                    
+                                        <% recipe.ratings.forEach(function(rating) { %>
+                                            <% ratingSum += parseInt(rating.number) %>
+                                        <% }); %>
+                
+                                        <% var averageRating = ratingSum / (recipe.ratings.length - 1); %>
+                
+                                        <% if(averageRating > 0){ %>
+                                            <img src="/images/full-star.png" alt="Yellow Star"> 
+                                            <%= Math.round(averageRating) %>
                                         <% } else { %>
                                             <img src="/images/empty-star.png" alt="Gray Star">
                                         <% } %>

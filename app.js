@@ -3,13 +3,14 @@ var express         = require('express'),
     bodyParser      = require('body-parser'),
     mongoose        = require('mongoose'),
     methodOverride  = require('method-override'),
-    Recipe          = require('./models/recipe'),
     Comment         = require('./models/comment'),
+    Rating          = require('./models/rating'),
+    Recipe          = require('./models/recipe'),
     seedDB          = require('./seeds');
 
 // seedDB();
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
@@ -65,13 +66,14 @@ app.post('/recipes', function(req, res){
     var recipeDirections = req.body.directions;
     var newRecipe = {
         title: recipeTitle, 
-        rating: 0,
         image: imageURL,
         difficulty: recipeDifficulty,
         time: recipeTime,
         tags: recipeTags,
         ingredients: recipeIngredients,
-        directions: recipeDirections
+        directions: recipeDirections,
+        comments: [],
+        ratings: []
     }
     // Create new recipe and save to database
     Recipe.create(newRecipe, function(err, recipe) {
@@ -90,7 +92,7 @@ app.get('/recipes/new', function(req, res) {
 
 // SHOW
 app.get('/recipes/:id', function(req, res){
-    Recipe.findById(req.params.id).populate("comments").exec(function(err, recipe) {
+    Recipe.findById(req.params.id).populate("comments").populate("ratings").exec(function(err, recipe) {
         if(err) {
             console.log(err);
             res.redirect('/recipes');
@@ -190,10 +192,33 @@ app.post('/recipes/:id/comments', function(req, res) {
                 }
             });
         }
-    });
-    
-    
-    
+    });   
+});
+
+// ==================
+// RATINGS ROUTES
+// ==================
+app.post('/recipes/:id/ratings', function(req, res) {
+    //Lookup recipe
+    Recipe.findById(req.params.id, function(err, recipe) {
+        if(err){
+            console.log(err);
+            res.redirect('/recipes');
+        } else {
+            //Add new rating
+            Rating.create(req.body.rating, function(err, rating) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    //Connect rating to recipe
+                    recipe.ratings.push(rating);
+                    recipe.save();
+                    //Redirect to the recipe show page
+                    res.redirect(`/recipes/${recipe._id}`);
+                }
+            });
+        }
+    });   
 });
 
 app.listen(3000, function(){
