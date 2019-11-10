@@ -45,7 +45,7 @@ app.get('/', function(req, res){
 // INDEX
 app.get('/recipes', function(req, res){
     // Get recipes from database
-    Recipe.find({}, function(err, recipes) {
+    Recipe.find({}).populate("ratings").exec(function(err, recipes) {
         if(err) {
             console.log(err);
         } else {
