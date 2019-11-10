@@ -1,0 +1,28 @@
+<div class="navbar">
+    <% if(currentUser) { %>
+    <div class="top-bar">
+        <div class="container">
+            <span class="welcome-user">Welcome, <%= currentUser.username %></span>
+        </div>
+    </div>
+    <% } %>
+    <div class="bottom-bar container">
+        <a href="/" class="logo-link"><img src="/images/logo-dark.png" alt="Logo" id="logo-dark"></a>
+        <nav id="nav">
+            <span class="toggle-menu"><img src="/images/toggle-menu.png" alt="Menu Toggle"></span>
+            <span class="close-menu"><img src="/images/close-menu.png" alt="X"></span>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/recipes">Recipes</a></li>
+                <li><a href="/coming-soon">Canning</a></li>
+                <li><a href="/coming-soon">Gardening</a></li>
+                <% if(!currentUser) { %>
+                    <li><a href="/register" class="button-nav">Join</a></li>
+                    <li><a href="/login">Login</a></li>
+                <% } else { %>
+                    <li><a href="/logout">Logout</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</div>

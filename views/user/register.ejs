@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+<% include ../partials/body-inner %>
+<% include ../partials/nav %>
+
+<main>
+    <section id="register">
+        <div class="container">
+            <h1>Sign Up</h1>
+            <h2 class="subheader">Create an account to rate recipes, add favorites, and publish your own recipes on the site!</h2>
+            <form action="/register" method="POST" id="default-form">
+                <div class="form-wrapper">
+                    <div>
+                        <label for="username"><sup>* </sup>Username</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div>
+                        <label for="password"><sup>* </sup>Password</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                </div>
+                <button type="submit" class="submit">Sign Up</button>
+            </form>
+            <p class="form-blurb">Already have an acount? <a href="/login" class="link">Log in</a></p>
+        </div>
+    </section>
+</main>
+
+<% include ../partials/footer %>

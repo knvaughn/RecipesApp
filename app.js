@@ -1,242 +1,53 @@
-var express         = require('express'),
-    app             = express(),
-    bodyParser      = require('body-parser'),
-    mongoose        = require('mongoose'),
-    methodOverride  = require('method-override'),
-    Comment         = require('./models/comment'),
-    Rating          = require('./models/rating'),
-    Recipe          = require('./models/recipe'),
-    seedDB          = require('./seeds');
+var express                 = require('express'),
+    app                     = express(),
+    bodyParser              = require('body-parser'),
+    mongoose                = require('mongoose'),
+    methodOverride          = require('method-override'),
+    Comment                 = require('./models/comment'),
+    Rating                  = require('./models/rating'),
+    Recipe                  = require('./models/recipe'),
+    passport                = require('passport'),
+    User                    = require('./models/user'),
+    LocalStrategy           = require('passport-local'),
+    passportLocalMongoose   = require('passport-local-mongoose'),
+    seedDB                  = require('./seeds');
+
+var recipeRoutes            = require('./routes/recipes'),
+    commentRoutes           = require('./routes/comments'),
+    ratingRoutes            = require('./routes/ratings'),
+    comingSoonRoutes        = require('./routes/coming-soon'),
+    indexRoutes             = require('./routes/index');
 
 // seedDB();
 
-app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
+app.use(require('express-session')({
+    secret: "The Invention of Nature",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-// Connect to Database
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
+
+app.use(indexRoutes);
+app.use(recipeRoutes);
+app.use(commentRoutes);
+app.use(ratingRoutes);
+app.use(comingSoonRoutes);
+
 mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true});
-
-// RESTFUL ROUTES - a way of mapping HTTP routes and CRUD (Create, Read, Update, Destroy)
-//
-// name        url                      verb        description
-// ==============================================================================================
-// INDEX     /recipes                   GET        get all recipes
-// NEW       /recipes/new               GET        displays form to create new recipe
-// CREATE    /recipes                   POST       add new recipe to the database
-// SHOW      /recipes/:id               GET        shows info about one recipe
-// EDIT      /recipes/:id/edit          GET        displays edit form to edit a recipe
-// UPDATE    /recipes/:id               PUT        updates a specific recipe and redirects somewhere
-// DESTROY   /recipes/:id               DELETE     deletes a specific recipe and redirects somewhere    
-// ==============================================================================================
-//
-// NESTED ROUTES
-//
-// NEW       /recipes/:id/comments/new  GET
-// CREATE    /recipes/:id/comments      POST
-//
-// ==============================================================================================
-
-app.get('/', function(req, res){
-    res.render('home');
-});
-
-// INDEX
-app.get('/recipes', function(req, res){
-    // Get recipes from database
-    Recipe.find({}).populate("ratings").exec(function(err, recipes) {
-        if(err) {
-            console.log(err);
-        } else {
-            // Render the recipes page and pass through the recipes from database
-            res.render('recipes/index', {recipes: recipes});
-        }
-    });
-});
-
-// CREATE
-app.post('/recipes', function(req, res){
-    var recipeTitle = req.body.recipetitle;
-    var imageURL = req.body.imageurl;
-    var recipeDifficulty = req.body.difficulty;
-    var recipeTime = req.body.time;
-    var recipeTags = req.body.tags;
-    var recipeIngredients = req.body.ingredients;
-    var recipeDirections = req.body.directions;
-    var newRecipe = {
-        title: recipeTitle, 
-        image: imageURL,
-        difficulty: recipeDifficulty,
-        time: recipeTime,
-        tags: recipeTags,
-        ingredients: recipeIngredients,
-        directions: recipeDirections,
-        comments: [],
-        ratings: []
-    }
-    // Create new recipe and save to database
-    Recipe.create(newRecipe, function(err, recipe) {
-        if(err) {
-            console.log(err)
-        } else {
-            res.redirect('/recipes');
-        }
-    });
-});
-
-// NEW
-app.get('/recipes/new', function(req, res) {
-    res.render('recipes/new');
-});
-
-// SHOW
-app.get('/recipes/:id', function(req, res){
-    Recipe.findById(req.params.id).populate("comments").populate("ratings").exec(function(err, recipe) {
-        if(err) {
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            // Render the show page and pass through the specific recipe from database
-            res.render('recipes/show', {recipe: recipe});
-        }
-    });
-});
-
-// EDIT
-app.get('/recipes/:id/edit', function(req, res){
-    Recipe.findById(req.params.id, function(err, recipe) {
-        if(err) {
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            // Render the edit page and pass through the specific recipe from database
-            res.render('recipes/edit', {recipe: recipe});
-        }
-    });
-})
-
-// UPDATE
-app.put('/recipes/:id', function(req, res) {
-    var recipeTitle = req.body.recipetitle;
-    var imageURL = req.body.imageurl;
-    var recipeDifficulty = req.body.difficulty;
-    var recipeTime = req.body.time;
-    var recipeTags = req.body.tags;
-    var recipeIngredients = req.body.ingredients;
-    var recipeDirections = req.body.directions;
-    var recipeRating = req.body.recipeRating;
-    var recipeID = req.params.id;
-    var updatedRecipe = {
-        title: recipeTitle, 
-        rating: recipeRating,
-        image: imageURL,
-        difficulty: recipeDifficulty,
-        time: recipeTime,
-        tags: recipeTags,
-        ingredients: recipeIngredients,
-        directions: recipeDirections
-    }
-    // Find the existing recipe and update it
-    Recipe.findByIdAndUpdate(recipeID, updatedRecipe, function(err, updatedRecipe) {
-        if(err) {
-            console.log(err)
-        } else {
-            res.redirect(`/recipes/${recipeID}`);
-        }
-    });
-});
-
-// DELETE
-app.delete('/recipes/:id', function(req, res) {
-    Recipe.findByIdAndRemove(req.params.id, function(err) {
-        if(err) {
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            res.redirect('/recipes');
-        }
-    });
-});
-
-// ==================
-// COMMENTS ROUTES
-// ==================
-app.get('/recipes/:id/comments/new', function(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
-        if(err) {
-            console.log(err);
-        } else {
-            res.render('comments/new', {recipe: recipe});
-        }
-    });
-});
-
-app.post('/recipes/:id/comments', function(req, res) {
-    //Lookup recipe
-    Recipe.findById(req.params.id, function(err, recipe) {
-        if(err){
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            //Create new comment
-            Comment.create(req.body.comment, function(err, comment) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    //Connect comment to recipe
-                    recipe.comments.push(comment);
-                    recipe.save();
-                    //Redirect to the recipe show page
-                    res.redirect(`/recipes/${recipe._id}`);
-                }
-            });
-        }
-    });   
-});
-
-// ==================
-// RATINGS ROUTES
-// ==================
-app.post('/recipes/:id/ratings', function(req, res) {
-    //Lookup recipe
-    Recipe.findById(req.params.id, function(err, recipe) {
-        if(err){
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            //Add new rating
-            Rating.create(req.body.rating, function(err, rating) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    //Connect rating to recipe
-                    recipe.ratings.push(rating);
-                    recipe.save();
-                    //Redirect to the recipe show page
-                    res.redirect(`/recipes/${recipe._id}`);
-                }
-            });
-        }
-    });   
-});
 
 app.listen(3000, function(){
     console.log('Starting app on port 3000');
 });
-
-// var relish = new Recipe({
-//     title: 'Relish',
-//     image: 'https://cdn.pixabay.com/photo/2015/02/06/15/50/canning-626204_960_720.jpg',
-//     difficulty: "easy",
-//     time: "2 hr",
-//     tags: ["Canning"]
-// });
-// relish.save(function(err, recipe){
-//     if(err) {
-//         console.log("Error");
-//     } else {
-//         console.log("Success! Newly created: ");
-//         console.log(recipe);
-//     }
-// });

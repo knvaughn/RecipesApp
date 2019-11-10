@@ -1,7 +1,9 @@
-<% include ../partials/header-inner %>
+<% include ../partials/header %>
+<% include ../partials/body-inner %>
+<% include ../partials/nav %>
 
 <main>
-    <section id="new-recipe">
+    <section id="edit-recipe">
         <div class="container">
             <div class="wrap">
                 <h1><%= recipe.title %></h1>
@@ -11,7 +13,7 @@
             </div>
             <h2 class="subheader">Edit your recipe details below.</h2>
             <p class="form-blurb">Review and submit the following information to update your <%= recipe.title %> recipe! </p>
-            <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" id="new-recipe-form">
+            <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" id="default-form">
                 <div class="form-wrapper">
                     <div>
                         <h3><sup>* </sup>Recipe Title:</h3>
@@ -23,7 +25,7 @@
                     </div>
                     <div>
                         <h3><sup>* </sup>Recipe Difficulty:</h3>
-                        <% var difficultyOptions = ["easy", "moderate", "hard"]; %>
+                        <% var difficultyOptions = ["easy", "average", "difficult"]; %>
                         <select name="difficulty" id="difficulty" required="required">
                             <% difficultyOptions.forEach(function(option) { %>
                                 <% var selected = (option == recipe.difficulty) ? "selected" : ""; %>

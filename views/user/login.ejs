@@ -1,0 +1,27 @@
+<% include ../partials/header %>
+<% include ../partials/body-inner %>
+<% include ../partials/nav %>
+
+<main>
+    <section id="login">
+        <div class="container">
+            <h1>Login</h1>
+            <form action="/login" method="POST" id="default-form">
+                <div class="form-wrapper">
+                    <div>
+                        <label for="username"><sup>* </sup>Username</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div>
+                        <label for="password"><sup>* </sup>Password</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                </div>
+                <button type="submit" class="submit">Login</button>
+            </form>
+            <p class="form-blurb">Don't have an account yet? <a href="/register" class="link">Sign up</a></p>
+        </div>
+    </section>
+</main>
+
+<% include ../partials/footer %>

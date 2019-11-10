@@ -1,4 +1,6 @@
-<% include ../partials/header-inner %>
+<% include ../partials/header %>
+<% include ../partials/body-inner %>
+<% include ../partials/nav %>
 
 <main>
     <section id="recipes">
@@ -23,11 +25,11 @@
                                             <% ratingSum += parseInt(rating.number) %>
                                         <% }); %>
                 
-                                        <% var averageRating = ratingSum / (recipe.ratings.length - 1); %>
+                                        <% var averageRating = ratingSum / (recipe.ratings.length); %>
                 
                                         <% if(averageRating > 0){ %>
                                             <img src="/images/full-star.png" alt="Yellow Star"> 
-                                            <%= Math.round(averageRating) %>
+                                            <%= Math.round(averageRating*10)/10 %>
                                         <% } else { %>
                                             <img src="/images/empty-star.png" alt="Gray Star">
                                         <% } %>
