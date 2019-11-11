@@ -20,7 +20,12 @@ router.post('/recipes/:id/ratings', isLoggedIn, function(req, res) {
                 } else {
                     //Connect rating to recipe
                     recipe.ratings.push(rating);
-                    recipe.save();
+
+                    recipe.save(function(err) {
+                        if(err) {
+                            console.log(err)
+                        }
+                    });
                     //Redirect to the recipe show page
                     res.redirect(`/recipes/${recipe._id}`);
                 }

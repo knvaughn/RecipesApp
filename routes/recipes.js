@@ -9,7 +9,7 @@ router.get('/recipes', function(req, res){
         if(err) {
             console.log(err);
         } else {
-            // Render the recipes page and pass through the recipes from database
+            // Render the recipes page and pass through the recipes from database and the calculated average rating
             res.render('recipes/index', {recipes: recipes});
         }
     });
@@ -57,8 +57,16 @@ router.get('/recipes/:id', function(req, res){
             console.log(err);
             res.redirect('/recipes');
         } else {
+            //Calculate the new average rating
+            var sum = 0;
+            recipe.ratings.forEach(function(rating) {
+                var num = parseInt(rating.value);
+                sum += num;
+            });
+            var averageRating = sum / recipe.ratings.length;
+            averageRating = Math.round(averageRating*10)/10;
             // Render the show page and pass through the specific recipe from database
-            res.render('recipes/show', {recipe: recipe});
+            res.render('recipes/show', {recipe: recipe, averageRating: averageRating});
         }
     });
 });

@@ -22,7 +22,7 @@
                                         <% var ratingSum = 0; %>
                     
                                         <% recipe.ratings.forEach(function(rating) { %>
-                                            <% ratingSum += parseInt(rating.number) %>
+                                            <% ratingSum += parseInt(rating.value) %>
                                         <% }); %>
                 
                                         <% var averageRating = ratingSum / (recipe.ratings.length); %>

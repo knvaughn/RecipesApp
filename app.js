@@ -46,7 +46,7 @@ app.use(commentRoutes);
 app.use(ratingRoutes);
 app.use(comingSoonRoutes);
 
-mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
 
 app.listen(3000, function(){
     console.log('Starting app on port 3000');

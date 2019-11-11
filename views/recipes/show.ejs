@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <% include ../partials/body-inner %>
 <% include ../partials/nav %>
-
+<script src="/js/ratings.js"></script>
 <header class="inner-header">
     <div class="container-small">
         <div class="hero">
@@ -27,17 +27,9 @@
                 <h1><%= recipe.title %></h1>
                 <div class="recipe-info">
                     <div class="recipe-rating">
-                        <% var ratingSum = 0; %>
-                        
-                        <% recipe.ratings.forEach(function(rating) { %>
-                            <% ratingSum += parseInt(rating.number) %>
-                        <% }); %>
-
-                        <% var averageRating = ratingSum / (recipe.ratings.length); %>
-
                         <% if(averageRating > 0){ %>
                             <img src="/images/full-star.png" alt="Yellow Star"> 
-                            <%= Math.round(averageRating*10)/10 %>
+                            <%= averageRating %>
                         <% } else { %>
                             <img src="/images/empty-star.png" alt="Gray Star">
                         <% } %>
@@ -61,7 +53,7 @@
                             <span class="rating-star"></span>
                         </div>
                         <form action="/recipes/<%= recipe._id %>/ratings" method="POST">
-                            <input id="ratingInput" type="hidden" name="rating[number]" value="0">
+                            <input id="ratingInput" type="hidden" name="rating[value]" value="0">
                             <button type="submit" id="rate-recipe-button">Save</button>
                         </form>
                     </div>

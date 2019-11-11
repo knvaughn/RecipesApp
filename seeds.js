@@ -50,7 +50,7 @@ function seedDB(){
                                         recipe.comments.push(comment);
                                         Rating.create(
                                             {
-                                                number: 5
+                                                value: 5
                                             }, 
                                             function(err, rating){
                                                 if(err) {
