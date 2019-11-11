@@ -80,7 +80,7 @@
             </div>
             <% recipe.comments.forEach(function(comment) { %>
                 <div class="comment">
-                    <h3><%= comment.author %></h3>
+                    <h3><%= comment.author.username %></h3>
                     <p><%= comment.text %></p>
                 </div>
             <% }); %>

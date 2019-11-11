@@ -28,6 +28,9 @@ router.post('/recipes/:id/comments', isLoggedIn, function(req, res) {
                 if(err) {
                     console.log(err);
                 } else {
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
                     //Connect comment to recipe
                     recipe.comments.push(comment);
                     recipe.save();

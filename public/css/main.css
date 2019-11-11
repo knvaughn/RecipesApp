@@ -101,7 +101,7 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 #comments {padding: 50px 20px; background: #eee; box-sizing: border-box;}
 #comments .container-small {background: #fff; border-radius: 20px; padding: 20px; box-sizing: border-box;}
 .comment {border-bottom: 1px solid #ececec;}
-.comment h3 {color: #e62457; font-size: 1rem;}
+.comment h3 {color: #e62457; font-size: 1rem; margin: 10px 0 0;}
 .comment p {font-size: .9rem;}
 .add-comment-button, #rate-recipe-button {display: inline-block; background: #61d4e7; color: #fff; padding: 10px 20px; border: none; border-radius: 3px; margin: 15px 0; text-decoration: none; transition: .25s;}
 .add-comment-button:hover, #rate-recipe-button:hover {background: rgba(97, 212, 231, .8); cursor: pointer;}

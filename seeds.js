@@ -37,31 +37,17 @@ function seedDB(){
                             console.log(err);
                         } else {
                             console.log("Created a recipe");
-                            Comment.create(
+                            Rating.create(
                                 {
-                                    text: "This recipe is delicious!",
-                                    author: "Kristin"
+                                    value: 5
                                 }, 
-                                function(err, comment) {
+                                function(err, rating){
                                     if(err) {
                                         console.log(err);
                                     } else {
-                                        console.log("Created a comment");
-                                        recipe.comments.push(comment);
-                                        Rating.create(
-                                            {
-                                                value: 5
-                                            }, 
-                                            function(err, rating){
-                                                if(err) {
-                                                    console.log(err);
-                                                } else {
-                                                    console.log("Added a rating");
-                                                    recipe.ratings.push(rating);
-                                                    recipe.save();
-                                                };
-                                            }
-                                        );
+                                        console.log("Added a rating");
+                                        recipe.ratings.push(rating);
+                                        recipe.save();
                                     };
                                 }
                             );
