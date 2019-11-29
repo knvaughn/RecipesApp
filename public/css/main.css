@@ -63,6 +63,8 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 .recipe-info {font-size: .8em; font-weight: 600; display: flex; justify-content: space-between;}
 .recipe-info img {vertical-align: middle; margin-bottom: 5px;}
 .recipe-tags {font-size: .8em; color: #555; margin: 10px 0; font-weight: 700;}
+.inner-tags {padding: 35px 0;}
+.recipe-author {font-size: .8em; color: #555; margin: 10px 0; font-weight: 400;}
 /* New Recipes */
 #new-recipe, #edit-recipe, #new-comment, #login, #register, #coming-soon {background: #eee; padding-bottom: 80px; min-height: 75vh;}
 .form-blurb {font-size: 1.3rem; margin-bottom: 70px;}
@@ -86,7 +88,7 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 .action-buttons {position: absolute; top: -35px; right: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
 .action-button {width: 55px; height: 55px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 5px;}
 .action-button:hover, .close-dialogue:hover {cursor: pointer;}
-#ingredients, #directions {padding-bottom: 50px;}
+#ingredients, #directions {padding-bottom: 35px;}
 /* Rate Dialogue */
 .rate-dialogue {display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(50,50,50,.6); padding: 20px; transition: .25s; opacity: 0; box-sizing: border-box; text-align: center;}
 .dialogue-inner {padding: 5px 15px; background: #fff; border-radius: 10px; width: 100%; max-width: 400px; text-align: center; display: inline-block; position: relative; top: 40%; transform: translateY(-50%); box-sizing: border-box;}
@@ -142,7 +144,8 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
 }
 @media screen and (max-width: 768px) {
     #logo-dark {width: 100px;}
-    .card, .wrap-even section {flex: 0 1 100%;}
+    .wrap-even section {flex: 0 1 100%;}
+    .card {flex: 0 1 100%;}
     .navbar {position: relative;}
     .close-menu {display: none;}
     #nav ul {display: none; position: absolute; top: 59px; right: 0; width: 100%; box-sizing: border-box; z-index: 991; background: #fff;}
@@ -151,8 +154,7 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
     #nav .button-nav {border-radius: 0;}
     #new-recipe-button, #delete-recipe-button {position: fixed; bottom: 5px; right: 5px; z-index: 999; box-shadow: -3px 7px 15px rgba(0, 0, 0, .1);}
     .container-small .card-content {width: 100%; box-sizing: border-box;}
-    .action-buttons {top: -202px; right: -5px; width: 65px;}
-    .action-button {flex: 0 1 100%;}
+    .action-buttons {top: -202px; right: -5px; width: 65px; height: 195px; flex-flow: column nowrap; justify-content: flex-end;}
     .category {flex: 0 1 50%;}
     .welcome-user {padding: 0;}
 }

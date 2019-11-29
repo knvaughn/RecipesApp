@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Recipe = require('../models/recipe');
+var Comment = require('../models/comment');
 
 // INDEX
 router.get('/recipes', function(req, res){
@@ -24,6 +25,10 @@ router.post('/recipes', isLoggedIn, function(req, res){
     var recipeTags = req.body.tags;
     var recipeIngredients = req.body.ingredients;
     var recipeDirections = req.body.directions;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
     var newRecipe = {
         title: recipeTitle, 
         image: imageURL,
@@ -33,13 +38,15 @@ router.post('/recipes', isLoggedIn, function(req, res){
         ingredients: recipeIngredients,
         directions: recipeDirections,
         comments: [],
-        ratings: []
+        ratings: [],
+        author: author
     }
     // Create new recipe and save to database
     Recipe.create(newRecipe, function(err, recipe) {
         if(err) {
             console.log(err)
         } else {
+            console.log(recipe)
             res.redirect('/recipes');
         }
     });
@@ -72,20 +79,14 @@ router.get('/recipes/:id', function(req, res){
 });
 
 // EDIT
-router.get('/recipes/:id/edit', isLoggedIn, function(req, res){
+router.get('/recipes/:id/edit', checkOwnership, function(req, res){
     Recipe.findById(req.params.id, function(err, recipe) {
-        if(err) {
-            console.log(err);
-            res.redirect('/recipes');
-        } else {
-            // Render the edit page and pass through the specific recipe from database
-            res.render('recipes/edit', {recipe: recipe});
-        }
+        res.render('recipes/edit', {recipe: recipe});
     });
-})
+});
 
 // UPDATE
-router.put('/recipes/:id', isLoggedIn, function(req, res) {
+router.put('/recipes/:id', checkOwnership, function(req, res) {
     var recipeTitle = req.body.recipetitle;
     var imageURL = req.body.imageurl;
     var recipeDifficulty = req.body.difficulty;
@@ -107,23 +108,19 @@ router.put('/recipes/:id', isLoggedIn, function(req, res) {
     }
     // Find the existing recipe and update it
     Recipe.findByIdAndUpdate(recipeID, updatedRecipe, function(err, updatedRecipe) {
-        if(err) {
-            console.log(err)
-        } else {
-            res.redirect(`/recipes/${recipeID}`);
-        }
+        res.redirect(`/recipes/${recipeID}`);
     });
 });
 
 // DELETE
-router.delete('/recipes/:id', isLoggedIn, function(req, res) {
-    Recipe.findByIdAndRemove(req.params.id, function(err) {
-        if(err) {
-            console.log(err);
+router.delete('/recipes/:id', checkOwnership, function(req, res) {
+    Recipe.findByIdAndRemove(req.params.id, function(err, recipeRemoved) {
+        Comment.deleteMany( {_id: { $in: recipeRemoved.comments } }, (err) => {
+            if (err) {
+                console.log(err);
+            }
             res.redirect('/recipes');
-        } else {
-            res.redirect('/recipes');
-        }
+        });
     });
 });
 
@@ -132,6 +129,25 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     res.redirect('/login');
+};
+
+function checkOwnership(req, res, next) {
+    if(req.isAuthenticated()) {
+        Recipe.findById(req.params.id, function(err, recipe) {
+            if(err) {
+                console.log(err);
+                res.redirect('/recipes');
+            } else {
+                if(recipe.author.id.equals(req.user._id)) {
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
 };
 
 module.exports = router;

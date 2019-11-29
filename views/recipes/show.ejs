@@ -17,9 +17,11 @@
                     <a class="rate-recipe action-button">
                         <img src="/images/open-star.png" alt="Open Star">
                     </a>
-                    <a href="/recipes/<%= recipe._id %>/edit" class="edit-recipe action-button">
-                        <img src="/images/pencil.png" alt="Pencil">
-                    </a>
+                    <% if(currentUser && recipe.author.id.equals(currentUser._id)) { %>
+                        <a href="/recipes/<%= recipe._id %>/edit" class="edit-recipe action-button">
+                            <img src="/images/pencil.png" alt="Pencil">
+                        </a>
+                    <% } %>
                     <a class="favorite-recipe action-button">
                         <img src="/images/open-heart.png" alt="Open Heart">
                     </a>
@@ -60,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="recipe-tags"><strong>Categories: </strong><%= recipe.tags.join(", "); %></div>
+        <div class="recipe-author"><strong>Submitted by: </strong><%= recipe.author.username %></div>
         <div class="wrap-even">
             <section id="ingredients">
                 <h2>Ingredients</h2>
@@ -71,6 +73,7 @@
                 <p class="preserve-lines"><%= recipe.directions %></p>
             </section>
         </div>
+        <div class="recipe-tags inner-tags"><strong>Categories: </strong><%= recipe.tags.join(", "); %></div>
     </div>
     <section id="comments">
         <div class="container-small">
@@ -84,6 +87,9 @@
                     <p><%= comment.text %></p>
                 </div>
             <% }); %>
+            <% if(recipe.comments.length < 1) { %>
+                <p>Be the first to comment.</p>
+            <% } %>
             <a href="/recipes/<%= recipe._id %>/comments/new" class="add-comment-button">Add Comment</a>
         </div>
     </section>
