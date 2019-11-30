@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var Recipe = require('../models/recipe');
 var Comment = require('../models/comment');
+var middleware = require('../middleware');
 
 // ==================
 // COMMENTS ROUTES
 // ==================
-router.get('/recipes/:id/comments/new', isLoggedIn, function(req, res) {
+router.get('/recipes/:id/comments/new', middleware.isLoggedIn, function(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
         if(err) {
             console.log(err);
@@ -16,7 +17,7 @@ router.get('/recipes/:id/comments/new', isLoggedIn, function(req, res) {
     });
 });
 
-router.post('/recipes/:id/comments', isLoggedIn, function(req, res) {
+router.post('/recipes/:id/comments', middleware.isLoggedIn, function(req, res) {
     //Lookup recipe
     Recipe.findById(req.params.id, function(err, recipe) {
         if(err){
@@ -42,11 +43,35 @@ router.post('/recipes/:id/comments', isLoggedIn, function(req, res) {
     });   
 });
 
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-};
+router.get('/recipes/:id/comments/:commentId/edit', middleware.checkCommentOwnership, function(req, res) {
+    Comment.findById(req.params.commentId, function(err, comment) {
+        if(err) {
+            console.log(err);
+            res.redirect("back");
+        }
+        res.render('comments/edit', {recipe_id: req.params.id, comment: comment});
+    });
+});
+
+router.put('/recipes/:id/comments/:commentId', middleware.checkCommentOwnership, function(req, res) {
+    Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err, updatedComment) {
+        if(err) {
+            res.redirect("back");
+        } else {
+            res.redirect(`/recipes/${req.params.id}`);
+        }
+    });
+});
+
+router.delete('/recipes/:id/comments/:commentId', middleware.checkCommentOwnership, function(req, res) {
+    Comment.findByIdAndRemove(req.params.commentId, function(err, commentRemoved) {
+        if (err) {
+            console.log(err);
+            res.redirect("back");
+        } else {
+            res.redirect(`/recipes/${req.params.id}`);
+        }
+    });
+});
 
 module.exports = router;

@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+<% include ../partials/body-inner %>
+<% include ../partials/nav %>
+
+<main>
+    <section id="new-comment">
+        <div class="container">
+            <h1>Edit Comment</h1>
+            <h2 class="subheader"><%= currentUser.username %></h2>
+            <form action="/recipes/<%= recipe_id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="default-form">
+                <div class="form-wrapper">
+                    <div>
+                        <h3><sup>* </sup>Comment:</h3>
+                        <textarea name="comment[text]" id="comment" cols="30" rows="10" required="required"><%= comment.text %></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit">Submit</button>
+                <div><a href="/recipes/<%= recipe_id %>" class="back">Go Back</a></div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<% include ../partials/footer %>

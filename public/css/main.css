@@ -52,8 +52,8 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 .category-image img {width: 100%; height: auto;}
 /* Recipes */
 #recipes {background: #eee; padding-bottom: 50px;}
-#recipe-cards {display: flex; flex-wrap: wrap; justify-content: space-between;}
-.card {border-radius: 20px; flex: 0 1 24%;}
+#recipe-cards {display: flex; flex-wrap: wrap; justify-content: flex-start; margin: -10px;}
+.card {border-radius: 20px; flex: 0 1 23.4%; margin: 10px;}
 #recipe-cards .card a {text-decoration: none; color: #000;}
 .thumbnail {border-radius: 20px; box-shadow: 0px 7px 15px rgba(0, 0, 0, .08); position: relative; width: 100%; padding-top: 100%; overflow: hidden;}
 .thumbnail-image {display: block; min-width: 100%; height: 100%; width: auto; border-radius: 20px; position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
@@ -99,13 +99,18 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 /* .rating-star:hover {background: url("/images/full-star.png") no-repeat center; cursor: pointer;}
 .rating-star:hover ~ .rating-star {background: url("/images/open-star.png") no-repeat center;} */
 /* Comments */
-.comments-divider {overflow: hidden;}
+.comments-divider {overflow: hidden; margin-bottom: 15px;}
 #comments {padding: 50px 20px; background: #eee; box-sizing: border-box;}
 #comments .container-small {background: #fff; border-radius: 20px; padding: 20px; box-sizing: border-box;}
-.comment {border-bottom: 1px solid #ececec;}
+.comment {background: #f4f4f4; padding: 5px 10px; border-radius: 20px; margin-top: 20px;}
+.edit-comment {padding: 10px;}
+.edit-comment form {display: inline-block;}
+.edit-comment .edit-comment-link {text-decoration: none; display: inline-block; margin-right: 15px; font-size: .85rem; color: #999; font-weight: 600;}
+.edit-comment input {border: 0; background: none; font-weight: 600; font-family: 'Nunito Sans', arial, sans-serif;}
+.edit-comment input:hover {cursor: pointer;}
 .comment h3 {color: #e62457; font-size: 1rem; margin: 10px 0 0;}
 .comment p {font-size: .9rem;}
-.add-comment-button, #rate-recipe-button {display: inline-block; background: #61d4e7; color: #fff; padding: 10px 20px; border: none; border-radius: 3px; margin: 15px 0; text-decoration: none; transition: .25s;}
+.add-comment-button, #rate-recipe-button {display: inline-block; background: #61d4e7; color: #fff; padding: 10px 20px; border: none; border-radius: 3px; margin: 25px 0 10px; text-decoration: none; transition: .25s;}
 .add-comment-button:hover, #rate-recipe-button:hover {background: rgba(97, 212, 231, .8); cursor: pointer;}
 #new-comment-button {font-size: 1.5rem; font-weight: bold; border-radius: 50px; padding: 3px 12px;}
 /* Edit Recipes */
@@ -118,7 +123,7 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; font-weight: 600;}
 /* Responsive */
 @media screen and (max-width: 1367px) {
-    .card {flex: 0 1 32%;}
+    .card {flex: 0 1 31.3%;}
 }
 @media screen and (max-width: 1200px) {
     .navbar {border-bottom: 1px solid rgba(0,0,0,.1);}
@@ -133,7 +138,7 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
     .form-wrapper div {flex: 0 100%;}
     .inner-header .container-small {padding: 0;}
     #inner .container-small h1 {font-size: 2rem;}
-    .card {flex: 0 1 49%;}
+    .card {flex: 0 1 46.3%;}
     #ingredients, #directions {flex: 0 1 100%;}
     .category {flex: 0 1 25%;}
     .category-image {flex: 0 1 100%;}
@@ -145,7 +150,6 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
 @media screen and (max-width: 768px) {
     #logo-dark {width: 100px;}
     .wrap-even section {flex: 0 1 100%;}
-    .card {flex: 0 1 100%;}
     .navbar {position: relative;}
     .close-menu {display: none;}
     #nav ul {display: none; position: absolute; top: 59px; right: 0; width: 100%; box-sizing: border-box; z-index: 991; background: #fff;}
@@ -157,6 +161,9 @@ footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; fon
     .action-buttons {top: -202px; right: -5px; width: 65px; height: 195px; flex-flow: column nowrap; justify-content: flex-end;}
     .category {flex: 0 1 50%;}
     .welcome-user {padding: 0;}
+}
+@media screen and (max-width: 600px) {
+    .card {flex: 0 1 100%;}
 }
 @media screen and (max-width: 400px) {
     .category {flex: 0 1 100%;}

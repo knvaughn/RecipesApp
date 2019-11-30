@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Recipe = require('../models/recipe');
 var Comment = require('../models/comment');
+var middleware = require('../middleware');
 
 // INDEX
 router.get('/recipes', function(req, res){
@@ -17,7 +18,7 @@ router.get('/recipes', function(req, res){
 });
 
 // CREATE
-router.post('/recipes', isLoggedIn, function(req, res){
+router.post('/recipes', middleware.isLoggedIn, function(req, res){
     var recipeTitle = req.body.recipetitle;
     var imageURL = req.body.imageurl;
     var recipeDifficulty = req.body.difficulty;
@@ -53,7 +54,7 @@ router.post('/recipes', isLoggedIn, function(req, res){
 });
 
 // NEW
-router.get('/recipes/new', isLoggedIn, function(req, res) {
+router.get('/recipes/new', middleware.isLoggedIn, function(req, res) {
     res.render('recipes/new');
 });
 
@@ -79,14 +80,14 @@ router.get('/recipes/:id', function(req, res){
 });
 
 // EDIT
-router.get('/recipes/:id/edit', checkOwnership, function(req, res){
+router.get('/recipes/:id/edit', middleware.checkOwnership, function(req, res){
     Recipe.findById(req.params.id, function(err, recipe) {
         res.render('recipes/edit', {recipe: recipe});
     });
 });
 
 // UPDATE
-router.put('/recipes/:id', checkOwnership, function(req, res) {
+router.put('/recipes/:id', middleware.checkOwnership, function(req, res) {
     var recipeTitle = req.body.recipetitle;
     var imageURL = req.body.imageurl;
     var recipeDifficulty = req.body.difficulty;
@@ -113,7 +114,7 @@ router.put('/recipes/:id', checkOwnership, function(req, res) {
 });
 
 // DELETE
-router.delete('/recipes/:id', checkOwnership, function(req, res) {
+router.delete('/recipes/:id', middleware.checkOwnership, function(req, res) {
     Recipe.findByIdAndRemove(req.params.id, function(err, recipeRemoved) {
         Comment.deleteMany( {_id: { $in: recipeRemoved.comments } }, (err) => {
             if (err) {
@@ -123,32 +124,6 @@ router.delete('/recipes/:id', checkOwnership, function(req, res) {
         });
     });
 });
-
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-};
-
-function checkOwnership(req, res, next) {
-    if(req.isAuthenticated()) {
-        Recipe.findById(req.params.id, function(err, recipe) {
-            if(err) {
-                console.log(err);
-                res.redirect('/recipes');
-            } else {
-                if(recipe.author.id.equals(req.user._id)) {
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            }
-        });
-    } else {
-        res.redirect("back");
-    }
-};
 
 module.exports = router;
 

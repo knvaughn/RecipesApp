@@ -86,6 +86,12 @@
                     <h3><%= comment.author.username %></h3>
                     <p><%= comment.text %></p>
                 </div>
+                <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                    <div class="edit-comment">
+                        <a href="/recipes/<%= recipe._id %>/comments/<%= comment._id %>/edit" class="edit-comment-link">Edit</a>
+                        <form action="/recipes/<%= recipe._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST"><input type="submit" class="edit-comment-link" value="Delete"></form>
+                    </div>
+                <% } %>
             <% }); %>
             <% if(recipe.comments.length < 1) { %>
                 <p>Be the first to comment.</p>
