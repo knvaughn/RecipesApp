@@ -16,10 +16,11 @@ var express                 = require('express'),
 var recipeRoutes            = require('./routes/recipes'),
     commentRoutes           = require('./routes/comments'),
     ratingRoutes            = require('./routes/ratings'),
+    favoriteRoutes          = require('./routes/favorites'),
     comingSoonRoutes        = require('./routes/coming-soon'),
     indexRoutes             = require('./routes/index');
 
-// seedDB();
+ seedDB();
 
 app.set('view engine', 'ejs');
 app.use(require('express-session')({
@@ -45,6 +46,7 @@ app.use(indexRoutes);
 app.use(recipeRoutes);
 app.use(commentRoutes);
 app.use(ratingRoutes);
+app.use(favoriteRoutes);
 app.use(comingSoonRoutes);
 
 mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});

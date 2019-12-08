@@ -2,7 +2,7 @@
 body {font-family: 'Nunito Sans', arial, sans-serif; margin: 0; font-size: 16px;}
 h1, h2 {font-family: 'Vidaloka', serif;}
 h1 {font-size: 5.5rem; margin: 30px 0;}
-.subheader {color: #cf2452;}
+.subheader {color: #111;}
 h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; display: inline-block;}
 #inner h1 {text-align: left; font-size: 3rem; margin: 0; padding: 60px 0;}
 .subheader-top {font-weight: normal; font-size: 1.5rem; color: #7d7d7d; display: block; font-family: 'Nunito Sans', arial, sans-serif; line-height: 1;}
@@ -16,7 +16,7 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 .button-round:hover {background: rgba(207, 36, 82, .8);}
 #nav .button-nav {background: #cf2452; color: #fff; border-radius: 3px;}
 #nav .button-nav:hover {background: rgba(207, 36, 82, .8); color: #fff;}
-.submit {padding: 20px; min-width: 250px; border-radius: 3px; background: #cf2452; color: #fff; font-weight: 800; border: none; font-size: 1rem; letter-spacing: 1px; transition: .25s;}
+.submit {margin-top: 10px; padding: 20px; min-width: 250px; border-radius: 3px; background: #cf2452; color: #fff; font-weight: 800; border: none; font-size: 1rem; letter-spacing: 1px; transition: .25s;}
 .submit:hover {cursor: pointer; background: rgba(207, 36, 82, .8);}
 .link {color: #cf2452; font-weight: bold; text-decoration: none;}
 /* Navigation */
@@ -86,16 +86,19 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 .container-small .card-content .recipe-info {justify-content: space-around; box-sizing: border-box; width: 100%; max-width: 400px; margin: 0 auto;}
 .container-small .recipe-tags {margin: -30px 0 20px; font-weight: normal;}
 .action-buttons {position: absolute; top: -35px; right: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
-.action-button {width: 55px; height: 55px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 5px;}
+.action-button {width: 55px; height: 55px; background: #fff; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; margin: 5px;}
 .action-button:hover, .close-dialogue:hover {cursor: pointer;}
 #ingredients, #directions {padding-bottom: 35px;}
 /* Rate Dialogue */
 .rate-dialogue {display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(50,50,50,.6); padding: 20px; transition: .25s; opacity: 0; box-sizing: border-box; text-align: center;}
-.dialogue-inner {padding: 5px 15px; background: #fff; border-radius: 10px; width: 100%; max-width: 400px; text-align: center; display: inline-block; position: relative; top: 40%; transform: translateY(-50%); box-sizing: border-box;}
+.dialogue-inner {padding: 25px 15px; background: #fff; border-radius: 10px; width: 100%; max-width: 400px; text-align: center; display: inline-block; position: relative; top: 40%; transform: translateY(-50%); box-sizing: border-box;}
 .close-dialogue {font-size: 1.75rem; color: #999; padding: 5px; position: absolute; top: 0; right: 10px;}
-.stars-wrapper {padding: 20px 0; font-size: 0;}
+.stars-wrapper {padding: 10px 0; font-size: 0;}
 .rating-star {display: inline-block; width: 28px; height: 25px; background: url("/images/open-star.png") no-repeat center; background-size: contain;}
 .rating-star:hover {cursor: pointer;}
+.rate-dialogue .close {display: inline-block; background: #eee; color: #777; padding: 10px 14px; border: none; border-radius: 3px; margin: 25px 5px 10px; text-decoration: none; transition: .25s;}
+.rate-dialogue .close:hover {cursor: pointer;}
+.rate-dialogue form {display: inline-block;}
 /* .rating-star:hover {background: url("/images/full-star.png") no-repeat center; cursor: pointer;}
 .rating-star:hover ~ .rating-star {background: url("/images/open-star.png") no-repeat center;} */
 /* Comments */
@@ -118,9 +121,13 @@ h3, #default-form label {font-weight: 800; font-size: 1.1rem; margin: 1em 0; dis
 #delete-recipe-button:hover {cursor: pointer;}
 /* Register */
 #register .form-blurb, #login .form-blurb {margin: 50px 0 70px;}
-#register .subheader {margin-bottom: 50px;}
+#register .subheader {margin-bottom: 50px; font-family: 'Nunito Sans'; font-size: 1.3rem;}
+#register .container, #login .container {max-width: 700px;}
+#register .form-wrapper>div, #login .form-wrapper>div {flex: 0 100%;}
 /* Footer */
 footer {background: #cf2452; padding: 20px; color: #fff; text-align: center; font-weight: 600;}
+footer .credit a {color: rgb(255, 135, 135); font-weight: bold; text-decoration: none; transition: all .25s;}
+footer .credit a:hover {color: #fff;}
 /* Responsive */
 @media screen and (max-width: 1367px) {
     .card {flex: 0 1 31.3%;}

@@ -4,6 +4,7 @@ window.onload = function() {
     var rateDialogue = document.querySelector(".rate-dialogue");
     var dialogueInner = document.querySelector(".dialogue-inner");
     var closeDialogueButton = document.querySelector(".close-dialogue");
+    var cancelButton = document.querySelector(".rate-dialogue .close");
 
     var openDialogue = function() {
         rateDialogue.style.display = "block";
@@ -26,6 +27,8 @@ window.onload = function() {
     dialogueInner.addEventListener("click", (event) => event.stopPropagation());
 
     closeDialogueButton.addEventListener("click", () => closeDialogue());
+
+    cancelButton.addEventListener("click", () => closeDialogue());
 
     // Rating stars functionality
     var ratingStars = Array.prototype.slice.call(document.querySelectorAll(".rating-star"));

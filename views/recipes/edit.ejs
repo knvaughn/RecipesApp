@@ -11,7 +11,6 @@
                     <button type="submit" class="button-round" id="delete-recipe-button"><img src="/images/trash.png" alt="Trash can"></button>
                 </form>
             </div>
-            <h2 class="subheader">Edit your recipe details below.</h2>
             <p class="form-blurb">Review and submit the following information to update your <%= recipe.title %> recipe! </p>
             <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" id="default-form">
                 <div class="form-wrapper">

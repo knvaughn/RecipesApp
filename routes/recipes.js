@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Recipe = require('../models/recipe');
 var Comment = require('../models/comment');
+var Rating = require('../models/rating');
+var Favorite = require('../models/favorite');
 var middleware = require('../middleware');
 
 // INDEX
@@ -40,6 +42,7 @@ router.post('/recipes', middleware.isLoggedIn, function(req, res){
         directions: recipeDirections,
         comments: [],
         ratings: [],
+        favorites: [],
         author: author
     }
     // Create new recipe and save to database
@@ -60,7 +63,7 @@ router.get('/recipes/new', middleware.isLoggedIn, function(req, res) {
 
 // SHOW
 router.get('/recipes/:id', function(req, res){
-    Recipe.findById(req.params.id).populate("comments").populate("ratings").exec(function(err, recipe) {
+    Recipe.findById(req.params.id).populate("comments").populate("ratings").populate("favorites").exec(function(err, recipe) {
         if(err) {
             console.log(err);
             res.redirect('/recipes');
@@ -120,7 +123,17 @@ router.delete('/recipes/:id', middleware.checkOwnership, function(req, res) {
             if (err) {
                 console.log(err);
             }
-            res.redirect('/recipes');
+            Rating.deleteMany( {_id: { $in: recipeRemoved.ratings } }, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                Favorite.deleteMany( {_id: { $in: recipeRemoved.favorites } }, (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    res.redirect('/recipes');
+                });
+            });
         });
     });
 });

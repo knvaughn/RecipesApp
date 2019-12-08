@@ -14,17 +14,37 @@
         <div class="card">
             <div class="card-content">
                 <div class="action-buttons">
-                    <a class="rate-recipe action-button">
-                        <img src="/images/open-star.png" alt="Open Star">
-                    </a>
+                    <% if(currentUser) { %>
+                        <% const foundRating = recipe.ratings.find(rating => rating.author.id.equals(currentUser._id)); %>
+                        <% if(foundRating) { %>
+                            <a class="rate-recipe action-button">
+                                <img src="/images/full-star.png" alt="Open Star">
+                            </a>
+                        <% } else { %>
+                            <a class="rate-recipe action-button">
+                                <img src="/images/open-star.png" alt="Open Star">
+                            </a>
+                        <% } %>
+                    <% } %>
                     <% if(currentUser && recipe.author.id.equals(currentUser._id)) { %>
                         <a href="/recipes/<%= recipe._id %>/edit" class="edit-recipe action-button">
                             <img src="/images/pencil.png" alt="Pencil">
                         </a>
                     <% } %>
-                    <a class="favorite-recipe action-button">
-                        <img src="/images/open-heart.png" alt="Open Heart">
-                    </a>
+                    <% if(currentUser) { %>
+                        <% const foundFavorite = recipe.favorites.find(favorite => favorite.author.id.equals(currentUser._id)); %>
+                        <% if(foundFavorite && foundFavorite.value == true) { %>
+                            <form action="/recipes/<%= recipe._id %>/favorites" method="POST">
+                                <input id="favoriteInput" type="hidden" name="favorite[value]" value="true">
+                                <button type="submit" class="favorite-recipe action-button"><img src="/images/full-heart.png" alt="Open Heart"></button>
+                            </form>
+                        <% } else { %>
+                            <form action="/recipes/<%= recipe._id %>/favorites" method="POST">
+                                <input id="favoriteInput" type="hidden" name="favorite[value]" value="true">
+                                <button type="submit" class="favorite-recipe action-button"><img src="/images/open-heart.png" alt="Open Heart"></button>
+                            </form>
+                        <% } %>
+                    <% } %>
                 </div>
                 <h1><%= recipe.title %></h1>
                 <div class="recipe-info">
@@ -54,6 +74,7 @@
                             <span class="rating-star"></span>
                             <span class="rating-star"></span>
                         </div>
+                        <button class="close">Cancel</button>
                         <form action="/recipes/<%= recipe._id %>/ratings" method="POST">
                             <input id="ratingInput" type="hidden" name="rating[value]" value="0">
                             <button type="submit" id="rate-recipe-button">Save</button>

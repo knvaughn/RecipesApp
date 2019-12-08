@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Comment = require('./models/comment');
 var Rating = require('./models/rating');
+var Favorite = require('./models/favorite');
 var Recipe = require('./models/recipe');
 
 var data = [
@@ -31,30 +32,54 @@ function seedDB(){
                 }
                 console.log("Removed ratings");
 
-                data.forEach(function(seed) {
-                    Recipe.create(seed, function(err, recipe) {
-                        if(err){
-                            console.log(err);
-                        } else {
-                            console.log("Created a recipe");
-                            Rating.create(
-                                {
-                                    value: 5
-                                }, 
-                                function(err, rating){
-                                    if(err) {
-                                        console.log(err);
-                                    } else {
-                                        console.log("Added a rating");
-                                        recipe.ratings.push(rating);
-                                        recipe.save();
-                                    };
-                                }
-                            );
-                            
-                            
-                        };
+                Favorite.remove({}, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                    console.log("Removed favorites");
+
+                    data.forEach(function(seed) {
+                        Recipe.create(seed, function(err, recipe) {
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log("Created a recipe");
+                                Rating.create(
+                                    {
+                                        value: 5,
+                                        author : {id : "5dc842c01b9868670020463f", username: "Kristin"},
+                                        parent: {id: recipe._id}
+                                    }, 
+                                    function(err, rating){
+                                        if(err) {
+                                            console.log(err);
+                                        } else {
+                                            console.log("Added a rating");
+                                            recipe.ratings.push(rating);
+
+                                            Favorite.create(
+                                                {
+                                                    value: false,
+                                                    author : {id : "5dc842c01b9868670020463f", username: "Kristin"},
+                                                    parent: {id: recipe._id}
+                                                }, 
+                                                function(err, favorite){
+                                                    if(err) {
+                                                        console.log(err);
+                                                    } else {
+                                                        console.log("Added a favorite");
+                                                        recipe.favorites.push(favorite);
+                                                        recipe.save();
+                                                    };
+                                                }
+                                            );
+                                        };
+                                    }
+                                );
+                            };
+                        });
                     });
+
                 });
             });
         }); 

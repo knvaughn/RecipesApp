@@ -27,6 +27,12 @@ var recipeSchema = new mongoose.Schema({
            type: mongoose.Schema.Types.ObjectId,
            ref: "Rating"
         }
+    ],
+    favorites: [
+        {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "Favorite"
+        }
     ]
 });
 
