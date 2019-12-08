@@ -20,7 +20,7 @@ var recipeRoutes            = require('./routes/recipes'),
     comingSoonRoutes        = require('./routes/coming-soon'),
     indexRoutes             = require('./routes/index');
 
- seedDB();
+ //seedDB();
 
 app.set('view engine', 'ejs');
 app.use(require('express-session')({
@@ -49,7 +49,7 @@ app.use(ratingRoutes);
 app.use(favoriteRoutes);
 app.use(comingSoonRoutes);
 
-mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
+//mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
 
 app.listen(3000, function(){
     console.log('Starting app on port 3000');
