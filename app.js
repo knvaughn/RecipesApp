@@ -21,6 +21,8 @@ var recipeRoutes            = require('./routes/recipes'),
     favoriteRoutes          = require('./routes/favorites'),
     comingSoonRoutes        = require('./routes/coming-soon'),
     uploadRoutes            = require('./routes/uploads'),
+    canningRoutes           = require('./routes/canning'),
+    gardeningRoutes         = require('./routes/gardening'),
     indexRoutes             = require('./routes/index');
 
 var db = require('./db');
@@ -53,6 +55,8 @@ app.use(commentRoutes);
 app.use(ratingRoutes);
 app.use(favoriteRoutes);
 app.use(uploadRoutes);
+app.use(canningRoutes);
+app.use(gardeningRoutes);
 app.use(comingSoonRoutes);
 
 //mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
