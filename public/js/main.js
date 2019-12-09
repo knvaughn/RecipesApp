@@ -24,3 +24,23 @@ window.onresize = function(event) {
         toggleMenu.style.display = "block"
     }
 };
+$(document).ready(function () {
+    // File Input Path
+    $(document).on('change', 'input[type="file"]', function () {
+        var file_field = $(this).closest('.file-field');
+        var path_input = file_field.find('.file-path');
+        var files = $(this)[0].files;
+        var file_names = [];
+        for (var i = 0; i < files.length; i++) {
+        file_names.push(files[i].name);
+        }
+        path_input[0].value = file_names.join(', ');
+        path_input.trigger('change');
+    });
+
+    if ( $( "#success" ).length ) {
+        $('html, body').animate({
+            scrollTop: ($('#success').offset().top)
+        },500);
+    }
+});

@@ -11,6 +11,8 @@ var express                 = require('express'),
     User                    = require('./models/user'),
     LocalStrategy           = require('passport-local'),
     passportLocalMongoose   = require('passport-local-mongoose'),
+    multer                  = require('multer'),
+    path                    = require('path'),
     seedDB                  = require('./seeds');
 
 var recipeRoutes            = require('./routes/recipes'),
@@ -18,9 +20,12 @@ var recipeRoutes            = require('./routes/recipes'),
     ratingRoutes            = require('./routes/ratings'),
     favoriteRoutes          = require('./routes/favorites'),
     comingSoonRoutes        = require('./routes/coming-soon'),
+    uploadRoutes            = require('./routes/uploads'),
     indexRoutes             = require('./routes/index');
 
- //seedDB();
+const db = require('./db');
+
+//seedDB();
 
 app.set('view engine', 'ejs');
 app.use(require('express-session')({
@@ -47,6 +52,7 @@ app.use(recipeRoutes);
 app.use(commentRoutes);
 app.use(ratingRoutes);
 app.use(favoriteRoutes);
+app.use(uploadRoutes);
 app.use(comingSoonRoutes);
 
 //mongoose.connect("mongodb://localhost:27017/simplefarmandgarden", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});

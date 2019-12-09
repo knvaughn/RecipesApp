@@ -6,7 +6,26 @@
     <section id="new-recipe">
         <div class="container">
             <h1>Add Recipe</h1>
-            <h2 class="subheader">Ready to upload a new recipe?</h2>
+            <h2 class="subheader">Step 1:</h2>
+            <p class="form-blurb">Upload a photo</p>
+            <% if(typeof msg != 'undefined') { %>
+                <p class="error-message"><i class="fas fa-times-circle"></i> <%= msg %></p>
+            <% } %>
+            <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
+                <div class="file-field input-field">
+                    <label for="file"><i class="fas fa-folder-open"></i> Choose a file</label>
+                    <input type="file" name="uploadedImage" id="file">
+                    <input type="text" class="file-path validate">
+                </div>
+                <p class="form-info">Recommended size: 960 x 500px</p>
+                <div>
+                    <button type="submit" class="upload-btn">Upload</button>
+                </div>
+                <% if(typeof successMsg != 'undefined') { %>
+                    <p class="success-message" id="success"><i class="fas fa-check-circle"></i> <%= successMsg %></p>
+                <% } %>
+            </form>
+            <h2 class="subheader">Step 2:</h2>
             <p class="form-blurb">Fill out and submit the form below to share your own delicious recipe on our site! </p>
             <form action="/recipes" method="POST" id="default-form">
                 <div class="form-wrapper">
@@ -15,8 +34,8 @@
                         <input name="recipetitle" type="text" placeholder="Recipe Title" required="required">
                     </div>
                     <div>
-                        <h3><sup>* </sup>Image URL:</h3>
-                        <input name="imageurl" type="text" placeholder="Image URL" required="required">
+                        <h3><sup>* </sup>Recipe Image:</h3>
+                        <input name="imageurl" type="text" placeholder="<%= typeof fileUrl != 'undefined' ? fileUrl : 'Image URL' %>" required="required" value="<%= typeof fileUrl != 'undefined' ? fileUrl : '' %>" <%= typeof fileUrl != 'undefined' ? "readonly" : '' %>>
                     </div>
                     <div>
                         <h3><sup>* </sup>Recipe Difficulty:</h3>
@@ -88,5 +107,4 @@
         </div>
     </section>
 </main>
-
 <% include ../partials/footer %>
