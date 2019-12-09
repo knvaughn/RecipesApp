@@ -23,7 +23,7 @@ var recipeRoutes            = require('./routes/recipes'),
     uploadRoutes            = require('./routes/uploads'),
     indexRoutes             = require('./routes/index');
 
-const db = require('./db');
+var db = require('./db');
 
 //seedDB();
 
